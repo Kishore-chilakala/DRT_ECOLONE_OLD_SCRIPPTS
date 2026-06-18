@@ -1,0 +1,389 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/all-scenarios.spec.ts",
+      "--headed",
+      "--timeout=120000"
+    ],
+    "configFile": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\playwright.config.js",
+    "rootDir": "C:/Users/nasarababu.purni/Desktop/Drt/DRT_ECOLONE_OLD_SCRIPPTS/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/nasarababu.purni/Desktop/Drt/DRT_ECOLONE_OLD_SCRIPPTS/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/nasarababu.purni/Desktop/Drt/DRT_ECOLONE_OLD_SCRIPPTS/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report",
+          "open": "never"
+        }
+      ],
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "all-scenarios.spec.ts",
+      "file": "all-scenarios.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Scenario 1: Login Functionality",
+          "file": "all-scenarios.spec.ts",
+          "line": 114,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-NS-001: Login to eColane DRT Platform and verify session is active",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 15277,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[TC-NS-001] ✓ Session active. URL: https://qa-react.ecolane.com/drt/\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-18T14:03:13.025Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1a7d409255df0495c2f7-7c015bee4a7a913adf74",
+              "file": "all-scenarios.spec.ts",
+              "line": 116,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Scenario 2: Create Trip for Client 21879",
+          "file": "all-scenarios.spec.ts",
+          "line": 175,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-NS-002: Login → Administration → Clients → 21879 → New Trip → fill → Create",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 53608,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[TC-NS-002] Clients page URL: https://qa-react.ecolane.com/drt/pages/customers\n"
+                        },
+                        {
+                          "text": "[TC-NS-002] No summary | urlChanged: \u001b[33mtrue\u001b[39m | toast: \u001b[33mfalse\u001b[39m\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-18T14:03:29.314Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1a7d409255df0495c2f7-7906e470e2168c6b390e",
+              "file": "all-scenarios.spec.ts",
+              "line": 177,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Scenario 3: Create a New Client",
+          "file": "all-scenarios.spec.ts",
+          "line": 352,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-NS-003: Login → Administration → Clients → New client → fill → Create",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "interrupted",
+                      "duration": 16054,
+                      "error": {
+                        "message": "Error: page.waitForTimeout: Target page, context or browser has been closed",
+                        "stack": "Error: page.waitForTimeout: Target page, context or browser has been closed\n    at C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\tests\\all-scenarios.spec.ts:361:16",
+                        "location": {
+                          "file": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\tests\\all-scenarios.spec.ts",
+                          "column": 16,
+                          "line": 361
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 359 |\u001b[39m\n \u001b[90m 360 |\u001b[39m       \u001b[36mawait\u001b[39m loginToApp(page)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 361 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2\u001b[39m_000)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 362 |\u001b[39m\n \u001b[90m 363 |\u001b[39m       \u001b[90m// Administration → Clients (codegen)\u001b[39m\n \u001b[90m 364 |\u001b[39m       \u001b[36mawait\u001b[39m clickMenuThenItem(page\u001b[33m,\u001b[39m \u001b[32m'Administration'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Clients'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\tests\\all-scenarios.spec.ts",
+                            "column": 16,
+                            "line": 361
+                          },
+                          "message": "Error: page.waitForTimeout: Target page, context or browser has been closed\n\n\u001b[0m \u001b[90m 359 |\u001b[39m\n \u001b[90m 360 |\u001b[39m       \u001b[36mawait\u001b[39m loginToApp(page)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 361 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2\u001b[39m_000)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 362 |\u001b[39m\n \u001b[90m 363 |\u001b[39m       \u001b[90m// Administration → Clients (codegen)\u001b[39m\n \u001b[90m 364 |\u001b[39m       \u001b[36mawait\u001b[39m clickMenuThenItem(page\u001b[33m,\u001b[39m \u001b[32m'Administration'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Clients'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\tests\\all-scenarios.spec.ts:361:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-18T14:04:22.986Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\test-results\\all-scenarios-Scenario-3-C-b7d5d--New-client-→-fill-→-Create-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\test-results\\all-scenarios-Scenario-3-C-b7d5d--New-client-→-fill-→-Create-chromium\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\test-results\\all-scenarios-Scenario-3-C-b7d5d--New-client-→-fill-→-Create-chromium\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\tests\\all-scenarios.spec.ts",
+                        "column": 16,
+                        "line": 361
+                      }
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1a7d409255df0495c2f7-ae58aa69593ccd71638e",
+              "file": "all-scenarios.spec.ts",
+              "line": 354,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Scenario 4: Batch Optimization",
+          "file": "all-scenarios.spec.ts",
+          "line": 486,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-NS-004a: Login → Operations → Schedules → Optimize schedules → Start",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1a7d409255df0495c2f7-161892995d942ae2b4d3",
+              "file": "all-scenarios.spec.ts",
+              "line": 495,
+              "column": 7
+            },
+            {
+              "title": "TC-NS-004b: Login → Operations → Schedules → Schedule tab → Mark for Review",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1a7d409255df0495c2f7-af39b4bf0ac331150062",
+              "file": "all-scenarios.spec.ts",
+              "line": 554,
+              "column": 7
+            },
+            {
+              "title": "TC-NS-004c: Login → Operations → Schedules → Mark Complete tab → Mark for Review",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1a7d409255df0495c2f7-21f121d2e5321b8dfd97",
+              "file": "all-scenarios.spec.ts",
+              "line": 599,
+              "column": 7
+            },
+            {
+              "title": "TC-NS-004d: Login → Operations → Schedules → Manual Dispatch tab → Mark for Review",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1a7d409255df0495c2f7-c6f2d2b04ca840ee3ad9",
+              "file": "all-scenarios.spec.ts",
+              "line": 643,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "Scenario 5: Send Messages",
+          "file": "all-scenarios.spec.ts",
+          "line": 695,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-NS-005: Login → Operations → Messages → Send message → fill → Send",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1a7d409255df0495c2f7-21a507ee558d56a67936",
+              "file": "all-scenarios.spec.ts",
+              "line": 697,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-06-18T14:03:12.005Z",
+    "duration": 87599.367,
+    "expected": 2,
+    "skipped": 6,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
