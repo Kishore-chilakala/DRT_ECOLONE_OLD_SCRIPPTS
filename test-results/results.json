@@ -103,7 +103,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 15277,
+                      "duration": 23299,
                       "errors": [],
                       "stdout": [
                         {
@@ -112,7 +112,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-06-18T14:03:13.025Z",
+                      "startTime": "2026-06-19T05:22:38.506Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -149,7 +149,7 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 53608,
+                      "duration": 53697,
                       "errors": [],
                       "stdout": [
                         {
@@ -161,7 +161,7 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-06-18T14:03:29.314Z",
+                      "startTime": "2026-06-19T05:23:28.257Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -197,58 +197,28 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "interrupted",
-                      "duration": 16054,
-                      "error": {
-                        "message": "Error: page.waitForTimeout: Target page, context or browser has been closed",
-                        "stack": "Error: page.waitForTimeout: Target page, context or browser has been closed\n    at C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\tests\\all-scenarios.spec.ts:361:16",
-                        "location": {
-                          "file": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\tests\\all-scenarios.spec.ts",
-                          "column": 16,
-                          "line": 361
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 359 |\u001b[39m\n \u001b[90m 360 |\u001b[39m       \u001b[36mawait\u001b[39m loginToApp(page)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 361 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2\u001b[39m_000)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 362 |\u001b[39m\n \u001b[90m 363 |\u001b[39m       \u001b[90m// Administration → Clients (codegen)\u001b[39m\n \u001b[90m 364 |\u001b[39m       \u001b[36mawait\u001b[39m clickMenuThenItem(page\u001b[33m,\u001b[39m \u001b[32m'Administration'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Clients'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
-                      },
-                      "errors": [
+                      "status": "passed",
+                      "duration": 42851,
+                      "errors": [],
+                      "stdout": [
                         {
-                          "location": {
-                            "file": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\tests\\all-scenarios.spec.ts",
-                            "column": 16,
-                            "line": 361
-                          },
-                          "message": "Error: page.waitForTimeout: Target page, context or browser has been closed\n\n\u001b[0m \u001b[90m 359 |\u001b[39m\n \u001b[90m 360 |\u001b[39m       \u001b[36mawait\u001b[39m loginToApp(page)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 361 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForTimeout(\u001b[35m2\u001b[39m_000)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 362 |\u001b[39m\n \u001b[90m 363 |\u001b[39m       \u001b[90m// Administration → Clients (codegen)\u001b[39m\n \u001b[90m 364 |\u001b[39m       \u001b[36mawait\u001b[39m clickMenuThenItem(page\u001b[33m,\u001b[39m \u001b[32m'Administration'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'Clients'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\tests\\all-scenarios.spec.ts:361:16\u001b[22m"
+                          "text": "[TC-NS-003] Clients page URL: https://qa-react.ecolane.com/drt/pages/customers\n"
+                        },
+                        {
+                          "text": "[TC-NS-003] New client form URL: https://qa-react.ecolane.com/drt/pages/customers/new\n"
+                        },
+                        {
+                          "text": "[TC-NS-003] hasClientDetail: \u001b[33mfalse\u001b[39m | redirect: \u001b[33mtrue\u001b[39m | toast: \u001b[33mfalse\u001b[39m\n"
                         }
                       ],
-                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-06-18T14:04:22.986Z",
+                      "startTime": "2026-06-19T05:24:22.009Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\test-results\\all-scenarios-Scenario-3-C-b7d5d--New-client-→-fill-→-Create-chromium\\test-failed-1.png"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\test-results\\all-scenarios-Scenario-3-C-b7d5d--New-client-→-fill-→-Create-chromium\\error-context.md"
-                        },
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\test-results\\all-scenarios-Scenario-3-C-b7d5d--New-client-→-fill-→-Create-chromium\\trace.zip"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\tests\\all-scenarios.spec.ts",
-                        "column": 16,
-                        "line": 361
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "1a7d409255df0495c2f7-ae58aa69593ccd71638e",
@@ -275,8 +245,29 @@
                   "expectedStatus": "passed",
                   "projectId": "chromium",
                   "projectName": "chromium",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 27007,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[navigateToSchedules] Schedules page URL: https://qa-react.ecolane.com/drt/pages/routes\n"
+                        },
+                        {
+                          "text": "[TC-NS-004a] ✓ Batch optimization triggered. Success indicator: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-19T05:25:04.906Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "1a7d409255df0495c2f7-161892995d942ae2b4d3",
@@ -290,13 +281,34 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 120000,
+                  "timeout": 90000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
                   "projectName": "chromium",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 24683,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[navigateToSchedules] Schedules page URL: https://qa-react.ecolane.com/drt/pages/routes\n"
+                        },
+                        {
+                          "text": "[TC-NS-004b] No \"Mark for Review\" button — no schedulable trips\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-19T05:25:31.945Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "1a7d409255df0495c2f7-af39b4bf0ac331150062",
@@ -310,13 +322,34 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 120000,
+                  "timeout": 90000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
                   "projectName": "chromium",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 24006,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[navigateToSchedules] Schedules page URL: https://qa-react.ecolane.com/drt/pages/routes\n"
+                        },
+                        {
+                          "text": "[TC-NS-004c] No \"Mark for Review\" button — no completable trips\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-19T05:25:56.650Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "1a7d409255df0495c2f7-21f121d2e5321b8dfd97",
@@ -330,13 +363,34 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 120000,
+                  "timeout": 90000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
                   "projectName": "chromium",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 23695,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[navigateToSchedules] Schedules page URL: https://qa-react.ecolane.com/drt/pages/routes\n"
+                        },
+                        {
+                          "text": "[TC-NS-004d] No \"Mark for Review\" button — no dispatchable trips\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-19T05:26:20.679Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "1a7d409255df0495c2f7-c6f2d2b04ca840ee3ad9",
@@ -363,8 +417,29 @@
                   "expectedStatus": "passed",
                   "projectId": "chromium",
                   "projectName": "chromium",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 25429,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[TC-NS-005] Messages page URL: https://qa-react.ecolane.com/drt/pages/messages\n"
+                        },
+                        {
+                          "text": "[TC-NS-005] messagesHeading: \u001b[33mtrue\u001b[39m | toast: \u001b[33mfalse\u001b[39m | noError: \u001b[33mtrue\u001b[39m\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-19T05:26:44.397Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "1a7d409255df0495c2f7-21a507ee558d56a67936",
@@ -379,10 +454,10 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-06-18T14:03:12.005Z",
-    "duration": 87599.367,
-    "expected": 2,
-    "skipped": 6,
+    "startTime": "2026-06-19T05:22:36.339Z",
+    "duration": 274261.505,
+    "expected": 8,
+    "skipped": 0,
     "unexpected": 0,
     "flaky": 0
   }
