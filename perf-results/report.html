@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Performance Report — tests/react-booking-new.spec.ts</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    /* ── Reset & Base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+
+    /* ── Layout ────────────────────────────────────────────── */
+    .container { max-width: 1400px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* ── Header ────────────────────────────────────────────── */
+    .header { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; border: 1px solid #334155; }
+    .header h1 { font-size: 1.75rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.5rem; }
+    .header .subtitle { color: #94a3b8; font-size: 0.95rem; }
+    .header .meta { display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .header .meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
+    .header .meta-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; }
+    .header .meta-value { font-size: 1rem; font-weight: 600; color: #e2e8f0; }
+
+    /* ── KPI Cards ─────────────────────────────────────────── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .kpi-card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .kpi-card .kpi-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; }
+    .kpi-card .kpi-value { font-size: 1.75rem; font-weight: 700; }
+    .kpi-card .kpi-sub { font-size: 0.8rem; color: #94a3b8; }
+    .kpi-green { color: #22c55e; }
+    .kpi-amber { color: #f59e0b; }
+    .kpi-red { color: #ef4444; }
+    .kpi-blue { color: #38bdf8; }
+    .kpi-purple { color: #a78bfa; }
+
+    /* ── Sections ───────────────────────────────────────────── */
+    .section { background: #1e293b; border: 1px solid #334155; border-radius: 10px; margin-bottom: 2rem; overflow: hidden; }
+    .section-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #334155; display: flex; align-items: center; gap: 0.75rem; }
+    .section-header h2 { font-size: 1.05rem; font-weight: 600; color: #f1f5f9; }
+    .section-icon { font-size: 1.25rem; }
+
+    /* ── Key transactions section accent ───────────────────── */
+    .section.key-tx { border-color: #0ea5e9; }
+    .section.key-tx .section-header { background: linear-gradient(90deg, #0c2a3a 0%, #1e293b 100%); border-bottom-color: #0ea5e9; }
+    .section.key-tx .section-header h2 { color: #7dd3fc; }
+
+    /* ── Charts ────────────────────────────────────────────── */
+    .chart-wrapper { padding: 1.5rem; position: relative; }
+    .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+    @media (max-width: 900px) { .chart-row { grid-template-columns: 1fr; } }
+    canvas { max-height: 320px; }
+
+    /* ── Tables ────────────────────────────────────────────── */
+    .table-wrapper { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    thead th { background: #0f172a; color: #94a3b8; padding: 0.75rem 1rem; text-align: left; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; position: sticky; top: 0; }
+    tbody td { padding: 0.75rem 1rem; border-bottom: 1px solid #1e293b; vertical-align: middle; }
+    tbody tr:hover td { background: #0f172a33; }
+    tbody tr:last-child td { border-bottom: none; }
+    .action-name { font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 0.8rem; color: #7dd3fc; max-width: 280px; word-break: break-all; }
+    .small-text { font-size: 0.78rem; color: #64748b; }
+    .row-fail td { background: #450a0a22; }
+
+    /* ── Badges ────────────────────────────────────────────── */
+    .badge { display: inline-flex; align-items: center; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.03em; }
+    .badge.pass { background: #14532d33; color: #86efac; border: 1px solid #166534; }
+    .badge.fail { background: #450a0a33; color: #fca5a5; border: 1px solid #7f1d1d; }
+    .badge.slow { background: #78350f33; color: #fcd34d; border: 1px solid #92400e; }
+
+    /* ── Nav timing mini-table ─────────────────────────────── */
+    .nav-table td:first-child { color: #94a3b8; width: 60%; }
+    .nav-table td:last-child { font-weight: 600; color: #e2e8f0; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    .footer { text-align: center; padding: 2rem; color: #475569; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ──────────────────────────────────────────────────────── -->
+  <div class="header">
+    <h1>⚡ Aggregate Performance Report</h1>
+    <div class="subtitle">tests/react-booking-new.spec.ts</div>
+    <div class="meta">
+      <div class="meta-item">
+        <span class="meta-label">Started</span>
+        <span class="meta-value">6/19/2026, 8:36:18 PM</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Finished</span>
+        <span class="meta-value">6/19/2026, 9:07:27 PM</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Configured Duration</span>
+        <span class="meta-value">30 minutes</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Generated</span>
+        <span class="meta-value">6/19/2026, 9:07:35 PM</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── KPI Cards ───────────────────────────────────────────────────── -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <span class="kpi-label">Total Iterations</span>
+      <span class="kpi-value kpi-blue">18</span>
+      <span class="kpi-sub">test runs</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Passed</span>
+      <span class="kpi-value kpi-green">17</span>
+      <span class="kpi-sub">94% success rate</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Failed</span>
+      <span class="kpi-value kpi-red">1</span>
+      <span class="kpi-sub">iterations with errors</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Avg Render Time</span>
+      <span class="kpi-value kpi-red">1590.0</span>
+      <span class="kpi-sub">ms across all actions</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">P75 Render Time</span>
+      <span class="kpi-value kpi-red">2503.7</span>
+      <span class="kpi-sub">ms (75th percentile)</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Max Render Time</span>
+      <span class="kpi-value kpi-red">17331.6</span>
+      <span class="kpi-sub">ms (worst single action)</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Min Render Time</span>
+      <span class="kpi-value kpi-green">29.0</span>
+      <span class="kpi-sub">ms (best single action)</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Total Measurements</span>
+      <span class="kpi-value kpi-purple">595</span>
+      <span class="kpi-sub">action timing samples</span>
+    </div>
+  </div>
+
+  <!-- ── Key Transactions ────────────────────────────────────────────── -->
+  <div class="section key-tx">
+    <div class="section-header">
+      <span class="section-icon">🎯</span>
+      <h2>Key Transaction Performance (Avg vs P75)</h2>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="keyTxChart" style="max-height:280px"></canvas>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Transaction</th>
+            <th>Samples</th>
+            <th>Avg (ms)</th>
+            <th>Min (ms)</th>
+            <th>Max (ms)</th>
+            <th>P75 (ms)</th>
+            <th>StdDev (ms)</th>
+            <th>Slow (>300ms)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr>
+        <td class="action-name">sign-in</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">4295.6</td>
+        <td>3096.7</td>
+        <td>4836.6</td>
+        <td style="color:#7c3aed;font-weight:600">4597.7</td>
+        <td>556.6</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">clients-list-load</td>
+        <td>51</td>
+        <td style="color:#7c3aed;font-weight:600">2826.1</td>
+        <td>2418.6</td>
+        <td>3523.8</td>
+        <td style="color:#7c3aed;font-weight:600">3076.5</td>
+        <td>270.9</td>
+        <td><span class="badge slow">51 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">create-new-client</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">3719.5</td>
+        <td>3349.7</td>
+        <td>4053.8</td>
+        <td style="color:#7c3aed;font-weight:600">3890.8</td>
+        <td>222.1</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">search-client-by-id</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">1140.7</td>
+        <td>1086.2</td>
+        <td>1245.7</td>
+        <td style="color:#7c3aed;font-weight:600">1152.4</td>
+        <td>36.1</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">confirm-trip-booking</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">14417.0</td>
+        <td>13175.4</td>
+        <td>17331.6</td>
+        <td style="color:#7c3aed;font-weight:600">14591.4</td>
+        <td>1142.6</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">navigate-to-messages</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">2290.6</td>
+        <td>2048.7</td>
+        <td>2869.4</td>
+        <td style="color:#7c3aed;font-weight:600">2441.6</td>
+        <td>237.9</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">send-message</td>
+        <td>17</td>
+        <td style="color:#ef4444;font-weight:600">479.2</td>
+        <td>442.7</td>
+        <td>520.4</td>
+        <td style="color:#ef4444;font-weight:600">491.4</td>
+        <td>19.9</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Charts row ──────────────────────────────────────────────────── -->
+  <div class="chart-row">
+    <!-- Trend chart: avg render per iteration -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📈</span>
+        <h2>Render Time Trend (Per Iteration)</h2>
+      </div>
+      <div class="chart-wrapper">
+        <canvas id="trendChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Action avg bar chart -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📊</span>
+        <h2>Per-Action Avg vs P75 (ms)</h2>
+      </div>
+      <div class="chart-wrapper">
+        <canvas id="actionChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Per-Action Statistics ────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🔍</span>
+      <h2>Per-Action Statistics (all iterations aggregated)</h2>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Samples</th>
+            <th>Avg (ms)</th>
+            <th>Min (ms)</th>
+            <th>Max (ms)</th>
+            <th>P75 (ms)</th>
+            <th>StdDev (ms)</th>
+            <th>Slow (>300ms)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr>
+        <td class="action-name">login-form-visible</td>
+        <td>17</td>
+        <td style="color:#22c55e;font-weight:600">68.4</td>
+        <td>56.8</td>
+        <td>81.0</td>
+        <td style="color:#22c55e;font-weight:600">73.7</td>
+        <td>7.4</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">fill-username</td>
+        <td>17</td>
+        <td style="color:#22c55e;font-weight:600">91.0</td>
+        <td>83.2</td>
+        <td>103.3</td>
+        <td style="color:#22c55e;font-weight:600">92.9</td>
+        <td>4.8</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">fill-password</td>
+        <td>17</td>
+        <td style="color:#22c55e;font-weight:600">83.3</td>
+        <td>62.3</td>
+        <td>117.5</td>
+        <td style="color:#22c55e;font-weight:600">96.2</td>
+        <td>16.6</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">sign-in</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">4295.6</td>
+        <td>3096.7</td>
+        <td>4836.6</td>
+        <td style="color:#7c3aed;font-weight:600">4597.7</td>
+        <td>556.6</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">open-administration-menu</td>
+        <td>17</td>
+        <td style="color:#22c55e;font-weight:600">73.4</td>
+        <td>59.4</td>
+        <td>113.4</td>
+        <td style="color:#22c55e;font-weight:600">77.7</td>
+        <td>12.6</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">clients-list-load</td>
+        <td>51</td>
+        <td style="color:#7c3aed;font-weight:600">2826.1</td>
+        <td>2418.6</td>
+        <td>3523.8</td>
+        <td style="color:#7c3aed;font-weight:600">3076.5</td>
+        <td>270.9</td>
+        <td><span class="badge slow">51 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">open-new-client-form</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">2990.9</td>
+        <td>1349.1</td>
+        <td>3935.8</td>
+        <td style="color:#7c3aed;font-weight:600">3676.7</td>
+        <td>932.7</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">select-client-title</td>
+        <td>17</td>
+        <td style="color:#22c55e;font-weight:600">42.9</td>
+        <td>29.0</td>
+        <td>58.5</td>
+        <td style="color:#22c55e;font-weight:600">47.4</td>
+        <td>8.1</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">fill-client-name</td>
+        <td>17</td>
+        <td style="color:#f59e0b;font-weight:600">209.1</td>
+        <td>174.2</td>
+        <td>233.4</td>
+        <td style="color:#f59e0b;font-weight:600">222.0</td>
+        <td>15.8</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">set-additional-loading-time</td>
+        <td>17</td>
+        <td style="color:#f59e0b;font-weight:600">204.3</td>
+        <td>152.7</td>
+        <td>232.0</td>
+        <td style="color:#f59e0b;font-weight:600">223.2</td>
+        <td>21.2</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">create-new-client</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">3719.5</td>
+        <td>3349.7</td>
+        <td>4053.8</td>
+        <td style="color:#7c3aed;font-weight:600">3890.8</td>
+        <td>222.1</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">search-client-by-id</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">1140.7</td>
+        <td>1086.2</td>
+        <td>1245.7</td>
+        <td style="color:#7c3aed;font-weight:600">1152.4</td>
+        <td>36.1</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">open-new-trip</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">5645.7</td>
+        <td>4029.3</td>
+        <td>6625.7</td>
+        <td style="color:#7c3aed;font-weight:600">6104.3</td>
+        <td>652.0</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">search-pickup-location</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">867.9</td>
+        <td>690.5</td>
+        <td>1304.4</td>
+        <td style="color:#ef4444;font-weight:600">797.9</td>
+        <td>222.2</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">select-pickup-address</td>
+        <td>17</td>
+        <td style="color:#f59e0b;font-weight:600">106.5</td>
+        <td>78.7</td>
+        <td>126.4</td>
+        <td style="color:#f59e0b;font-weight:600">112.1</td>
+        <td>13.8</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">fill-pickup-notes</td>
+        <td>17</td>
+        <td style="color:#f59e0b;font-weight:600">118.2</td>
+        <td>101.7</td>
+        <td>151.0</td>
+        <td style="color:#f59e0b;font-weight:600">128.7</td>
+        <td>13.8</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">search-dropoff-location</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">1115.0</td>
+        <td>660.0</td>
+        <td>1210.9</td>
+        <td style="color:#7c3aed;font-weight:600">1185.5</td>
+        <td>166.3</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">select-dropoff-address</td>
+        <td>17</td>
+        <td style="color:#22c55e;font-weight:600">75.7</td>
+        <td>51.3</td>
+        <td>95.9</td>
+        <td style="color:#22c55e;font-weight:600">81.6</td>
+        <td>11.7</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">fill-dropoff-notes</td>
+        <td>17</td>
+        <td style="color:#f59e0b;font-weight:600">117.7</td>
+        <td>92.8</td>
+        <td>159.0</td>
+        <td style="color:#f59e0b;font-weight:600">123.3</td>
+        <td>15.5</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">open-calendar</td>
+        <td>17</td>
+        <td style="color:#f59e0b;font-weight:600">141.0</td>
+        <td>111.7</td>
+        <td>167.7</td>
+        <td style="color:#f59e0b;font-weight:600">151.3</td>
+        <td>17.5</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">select-date-19</td>
+        <td>17</td>
+        <td style="color:#f59e0b;font-weight:600">112.7</td>
+        <td>82.5</td>
+        <td>136.3</td>
+        <td style="color:#f59e0b;font-weight:600">123.2</td>
+        <td>14.9</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">fill-outbound-time</td>
+        <td>17</td>
+        <td style="color:#f59e0b;font-weight:600">108.8</td>
+        <td>91.1</td>
+        <td>165.5</td>
+        <td style="color:#f59e0b;font-weight:600">114.8</td>
+        <td>16.2</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">preview-and-book</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">4848.7</td>
+        <td>3958.8</td>
+        <td>8150.0</td>
+        <td style="color:#7c3aed;font-weight:600">4729.7</td>
+        <td>1217.0</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">confirm-trip-booking</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">14417.0</td>
+        <td>13175.4</td>
+        <td>17331.6</td>
+        <td style="color:#7c3aed;font-weight:600">14591.4</td>
+        <td>1142.6</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">open-operations-menu</td>
+        <td>17</td>
+        <td style="color:#22c55e;font-weight:600">95.2</td>
+        <td>73.8</td>
+        <td>133.5</td>
+        <td style="color:#f59e0b;font-weight:600">101.0</td>
+        <td>16.2</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">navigate-to-messages</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">2290.6</td>
+        <td>2048.7</td>
+        <td>2869.4</td>
+        <td style="color:#7c3aed;font-weight:600">2441.6</td>
+        <td>237.9</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">open-send-message-form</td>
+        <td>17</td>
+        <td style="color:#ef4444;font-weight:600">495.1</td>
+        <td>435.8</td>
+        <td>978.8</td>
+        <td style="color:#ef4444;font-weight:600">478.6</td>
+        <td>121.8</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">select-vehicle</td>
+        <td>17</td>
+        <td style="color:#ef4444;font-weight:600">579.7</td>
+        <td>501.3</td>
+        <td>1103.9</td>
+        <td style="color:#ef4444;font-weight:600">576.6</td>
+        <td>134.0</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">select-provider-vehicle</td>
+        <td>17</td>
+        <td style="color:#ef4444;font-weight:600">604.7</td>
+        <td>548.0</td>
+        <td>637.5</td>
+        <td style="color:#ef4444;font-weight:600">630.0</td>
+        <td>23.6</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">select-message-template</td>
+        <td>17</td>
+        <td style="color:#f59e0b;font-weight:600">231.0</td>
+        <td>199.7</td>
+        <td>253.2</td>
+        <td style="color:#f59e0b;font-weight:600">244.4</td>
+        <td>17.2</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">send-message</td>
+        <td>17</td>
+        <td style="color:#ef4444;font-weight:600">479.2</td>
+        <td>442.7</td>
+        <td>520.4</td>
+        <td style="color:#ef4444;font-weight:600">491.4</td>
+        <td>19.9</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+      <tr>
+        <td class="action-name">open-user-menu</td>
+        <td>17</td>
+        <td style="color:#22c55e;font-weight:600">78.8</td>
+        <td>52.1</td>
+        <td>121.1</td>
+        <td style="color:#22c55e;font-weight:600">89.6</td>
+        <td>16.5</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="action-name">sign-out</td>
+        <td>17</td>
+        <td style="color:#7c3aed;font-weight:600">1724.1</td>
+        <td>1638.7</td>
+        <td>1982.6</td>
+        <td style="color:#7c3aed;font-weight:600">1739.1</td>
+        <td>75.9</td>
+        <td><span class="badge slow">17 slow</span></td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Per-Iteration Summary ────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🔄</span>
+      <h2>Per-Iteration Summary</h2>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Status</th>
+            <th>Duration</th>
+            <th>Avg Render (ms)</th>
+            <th>Max Render (ms)</th>
+            <th>Timings</th>
+            <th>Started At</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+    <tr class="">
+      <td>1</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>110.4s</td>
+      <td>1744.3</td>
+      <td>17331.6</td>
+      <td>35</td>
+      <td class="small-text">8:36:18 PM</td>
+    </tr>
+    <tr class="">
+      <td>2</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>111.3s</td>
+      <td>1716.5</td>
+      <td>15542.1</td>
+      <td>35</td>
+      <td class="small-text">8:38:08 PM</td>
+    </tr>
+    <tr class="row-fail">
+      <td>3</td>
+      <td><span class="badge fail">FAIL</span></td>
+      <td>40.8s</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td class="small-text">8:40:00 PM</td>
+    </tr>
+    <tr class="">
+      <td>4</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>105.9s</td>
+      <td>1534.2</td>
+      <td>13827.1</td>
+      <td>35</td>
+      <td class="small-text">8:40:41 PM</td>
+    </tr>
+    <tr class="">
+      <td>5</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>103.7s</td>
+      <td>1497.6</td>
+      <td>14370.7</td>
+      <td>35</td>
+      <td class="small-text">8:42:26 PM</td>
+    </tr>
+    <tr class="">
+      <td>6</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>108.6s</td>
+      <td>1568.9</td>
+      <td>13784.2</td>
+      <td>35</td>
+      <td class="small-text">8:44:10 PM</td>
+    </tr>
+    <tr class="">
+      <td>7</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>105.7s</td>
+      <td>1524.3</td>
+      <td>13175.4</td>
+      <td>35</td>
+      <td class="small-text">8:45:59 PM</td>
+    </tr>
+    <tr class="">
+      <td>8</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>107.3s</td>
+      <td>1588.7</td>
+      <td>13848.4</td>
+      <td>35</td>
+      <td class="small-text">8:47:44 PM</td>
+    </tr>
+    <tr class="">
+      <td>9</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>107.7s</td>
+      <td>1639.2</td>
+      <td>15179.4</td>
+      <td>35</td>
+      <td class="small-text">8:49:32 PM</td>
+    </tr>
+    <tr class="">
+      <td>10</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>105.6s</td>
+      <td>1531.3</td>
+      <td>13564.6</td>
+      <td>35</td>
+      <td class="small-text">8:51:19 PM</td>
+    </tr>
+    <tr class="">
+      <td>11</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>108.7s</td>
+      <td>1560.4</td>
+      <td>13697.0</td>
+      <td>35</td>
+      <td class="small-text">8:53:05 PM</td>
+    </tr>
+    <tr class="">
+      <td>12</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>107.8s</td>
+      <td>1612.3</td>
+      <td>13997.0</td>
+      <td>35</td>
+      <td class="small-text">8:54:54 PM</td>
+    </tr>
+    <tr class="">
+      <td>13</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>107.1s</td>
+      <td>1564.4</td>
+      <td>14164.4</td>
+      <td>35</td>
+      <td class="small-text">8:56:42 PM</td>
+    </tr>
+    <tr class="">
+      <td>14</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>107.6s</td>
+      <td>1604.6</td>
+      <td>14214.1</td>
+      <td>35</td>
+      <td class="small-text">8:58:29 PM</td>
+    </tr>
+    <tr class="">
+      <td>15</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>108.0s</td>
+      <td>1592.9</td>
+      <td>13334.5</td>
+      <td>35</td>
+      <td class="small-text">9:00:16 PM</td>
+    </tr>
+    <tr class="">
+      <td>16</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>107.8s</td>
+      <td>1560.9</td>
+      <td>14591.4</td>
+      <td>35</td>
+      <td class="small-text">9:02:04 PM</td>
+    </tr>
+    <tr class="">
+      <td>17</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>103.7s</td>
+      <td>1477.8</td>
+      <td>13625.1</td>
+      <td>35</td>
+      <td class="small-text">9:03:52 PM</td>
+    </tr>
+    <tr class="">
+      <td>18</td>
+      <td><span class="badge pass">PASS</span></td>
+      <td>110.8s</td>
+      <td>1711.9</td>
+      <td>16841.7</td>
+      <td>35</td>
+      <td class="small-text">9:05:36 PM</td>
+    </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Navigation Timing ───────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🌐</span>
+      <h2>Navigation Timing (averaged over 17 page loads)</h2>
+    </div>
+    <div class="chart-wrapper">
+      <table class="nav-table" style="max-width:500px">
+        <tbody>
+          
+    <tr><td>Avg DOM Content Loaded</td><td>4366.7 ms</td></tr>
+    <tr><td>Avg Time to First Byte (TTFB)</td><td>351.5 ms</td></tr>
+    <tr><td>Avg Load Event</td><td>4698.6 ms</td></tr>
+    <tr><td>Samples</td><td>17</td></tr>
+  
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    Report generated by <strong>generate-report.mjs</strong> on 6/19/2026, 9:07:35 PM &nbsp;|&nbsp;
+    Playwright Duration-Based Performance Runner
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ── Key Transactions Chart ────────────────────────────────────────────────────
+(function() {
+  const data = {"labels":["sign-in","clients-list-load","create-new-client","search-client-by-id","confirm-trip-booking","navigate-to-messages","send-message"],"avg":[4295.57,2826.07,3719.47,1140.66,14416.99,2290.58,479.24],"p75":[4597.68,3076.46,3890.82,1152.4,14591.44,2441.58,491.4],"max":[4836.6,3523.82,4053.83,1245.7,17331.59,2869.38,520.4]};
+  const ctx = document.getElementById('keyTxChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: data.labels,
+      datasets: [
+        {
+          label: 'Avg (ms)',
+          data: data.avg,
+          backgroundColor: data.avg.map(v => v <= 100 ? '#22c55e80' : v <= 300 ? '#f59e0b80' : '#ef444480'),
+          borderColor: data.avg.map(v => v <= 100 ? '#22c55e' : v <= 300 ? '#f59e0b' : '#ef4444'),
+          borderWidth: 1,
+        },
+        {
+          label: 'P75 (ms)',
+          data: data.p75,
+          backgroundColor: '#0ea5e940',
+          borderColor: '#0ea5e9',
+          borderWidth: 1,
+        },
+        {
+          label: 'Max (ms)',
+          data: data.max,
+          backgroundColor: '#a78bfa30',
+          borderColor: '#a78bfa',
+          borderWidth: 1,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        x: { ticks: { color: '#94a3b8', font: { size: 11 } }, grid: { color: '#1e293b' } },
+        y: { ticks: { color: '#64748b', callback: v => v + 'ms' }, grid: { color: '#334155' } }
+      },
+      plugins: {
+        legend: { labels: { color: '#94a3b8' } },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw + 'ms' } }
+      }
+    }
+  });
+})();
+
+// ── Trend Chart ──────────────────────────────────────────────────────────────
+(function() {
+  const trendData = {"labels":["Iter 1","Iter 2","Iter 3","Iter 4","Iter 5","Iter 6","Iter 7","Iter 8","Iter 9","Iter 10","Iter 11","Iter 12","Iter 13","Iter 14","Iter 15","Iter 16","Iter 17","Iter 18"],"avgRender":[1744.34,1716.47,0,1534.21,1497.61,1568.87,1524.25,1588.66,1639.25,1531.33,1560.38,1612.27,1564.38,1604.59,1592.91,1560.9,1477.81,1711.93],"maxRender":[17331.59,15542.12,0,13827.07,14370.75,13784.2,13175.44,13848.36,15179.37,13564.63,13697,13997.01,14164.43,14214.12,13334.45,14591.44,13625.1,16841.69],"passed":[true,true,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true]};
+  const ctx = document.getElementById('trendChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: trendData.labels,
+      datasets: [
+        {
+          label: 'Avg Render (ms)',
+          data: trendData.avgRender,
+          borderColor: '#38bdf8',
+          backgroundColor: '#38bdf820',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: trendData.passed.map(p => p ? '#22c55e' : '#ef4444'),
+        },
+        {
+          label: 'Max Render (ms)',
+          data: trendData.maxRender,
+          borderColor: '#f59e0b',
+          backgroundColor: 'transparent',
+          borderDash: [5, 3],
+          tension: 0.3,
+          pointRadius: 3,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        x: { ticks: { color: '#64748b', maxRotation: 45 }, grid: { color: '#1e293b' } },
+        y: { ticks: { color: '#64748b', callback: v => v + 'ms' }, grid: { color: '#334155' } }
+      },
+      plugins: {
+        legend: { labels: { color: '#94a3b8' } },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw + 'ms' } }
+      }
+    }
+  });
+})();
+
+// ── Action Chart ─────────────────────────────────────────────────────────────
+(function() {
+  const data = {"labels":["login-form-visible","fill-username","fill-password","sign-in","open-administration-menu","clients-list-load","open-new-client-form","select-client-title","fill-client-name","set-additional-loading-time","create-new-client","search-client-by-id","open-new-trip","search-pickup-location","select-pickup-address","fill-pickup-notes","search-dropoff-location","select-dropoff-address","fill-dropoff-notes","open-calendar","select-date-19","fill-outbound-time","preview-and-book","confirm-trip-booking","open-operations-menu","navigate-to-messages","open-send-message-form","select-vehicle","select-provider-vehicle","select-message-template","send-message","open-user-menu","sign-out"],"avg":[68.42,91.03,83.32,4295.57,73.36,2826.07,2990.9,42.92,209.08,204.29,3719.47,1140.66,5645.68,867.89,106.47,118.16,1115.01,75.65,117.68,140.98,112.68,108.8,4848.72,14416.99,95.17,2290.58,495.11,579.67,604.68,230.96,479.24,78.85,1724.12],"p75":[73.7,92.9,96.2,4597.68,77.7,3076.46,3676.68,47.4,222,223.2,3890.82,1152.4,6104.31,797.9,112.1,128.7,1185.5,81.6,123.3,151.3,123.2,114.8,4729.69,14591.44,101,2441.58,478.6,576.6,630,244.4,491.4,89.6,1739.1],"max":[81,103.3,117.5,4836.6,113.4,3523.82,3935.84,58.5,233.4,232,4053.83,1245.7,6625.66,1304.4,126.4,151,1210.9,95.9,159,167.7,136.3,165.5,8149.96,17331.59,133.5,2869.38,978.8,1103.9,637.5,253.2,520.4,121.1,1982.56]};
+  const ctx = document.getElementById('actionChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: data.labels,
+      datasets: [
+        {
+          label: 'Avg (ms)',
+          data: data.avg,
+          backgroundColor: data.avg.map(v => v <= 100 ? '#22c55e80' : v <= 300 ? '#f59e0b80' : '#ef444480'),
+          borderColor: data.avg.map(v => v <= 100 ? '#22c55e' : v <= 300 ? '#f59e0b' : '#ef4444'),
+          borderWidth: 1,
+        },
+        {
+          label: 'P75 (ms)',
+          data: data.p75,
+          backgroundColor: '#38bdf840',
+          borderColor: '#38bdf8',
+          borderWidth: 1,
+          type: 'bar',
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      indexAxis: 'y',
+      scales: {
+        x: { ticks: { color: '#64748b', callback: v => v + 'ms' }, grid: { color: '#334155' } },
+        y: { ticks: { color: '#94a3b8', font: { size: 11 } }, grid: { color: '#1e293b' } }
+      },
+      plugins: {
+        legend: { labels: { color: '#94a3b8' } },
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw + 'ms' } }
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

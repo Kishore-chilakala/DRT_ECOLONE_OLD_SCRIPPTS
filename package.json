@@ -1,42 +1,38 @@
 {
-  "name": "drt_ecolone_old_scrippts",
+  "name": "playwright-react-perf-e2e",
   "version": "1.0.0",
-  "description": "This repository contains the source code and test automation old scripts for the project.",
-  "main": "index.js",
+  "description": "Playwright E2E test suite for React apps with frontend rendering time measurement",
   "scripts": {
-    "test": "npx playwright test",
-    "test:headed": "npx playwright test --headed",
-    "test:ts": "npx playwright test tests/all-scenarios.spec.ts --headed --timeout=120000",
-    "test:scenario1": "npx playwright test tests/scenario1-login.spec.js --headed",
-    "test:scenario2": "npx playwright test tests/scenario2-createTrip.spec.js --headed",
-    "test:scenario3": "npx playwright test tests/scenario3-createClient.spec.js --headed",
-    "test:scenario4": "npx playwright test tests/scenario4-batchOptimization.spec.js --headed",
-    "test:scenario5": "npx playwright test tests/scenario5-sendMessages.spec.js --headed",
-    "test:all:headed": "npx playwright test --headed --timeout=120000",
-    "test:report": "npx playwright show-report",
-"test:debug": "npx playwright test --debug"
+    "test": "playwright test tests/ecolane-booking-new.spec.ts",
+    "test:headed": "playwright test --headed tests/ecolane-booking-new.spec.ts",
+    "test1": "playwright test tests/dispatcher-front-end.spec.ts",
+    "test1:headed": "playwright test --headed tests/dispatcher-front-end.spec.ts",
+    "test:booking": "playwright test tests/ecolane-trip-booking.spec.ts",
+    "test:booking:headed": "playwright test --headed tests/ecolane-trip-booking.spec.ts",
+    "test:dispatcher": "playwright test tests/dispatcher-perf-test.spec.ts",
+    "test:dispatcher:headed": "playwright test --headed tests/dispatcher-perf-test.spec.ts",
+    "test:all": "playwright test",
+    "test:all:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "codegen": "playwright codegen --browser=chromium",
+    "codegen:record": "playwright codegen --browser=chromium --output=tests/recorded.spec.ts",
+    "report": "playwright show-report",
+    "install:browsers": "playwright install chromium",
+    "perf:run": "node scripts/run-duration.mjs",
+    "perf:run:headed": "node scripts/run-duration.mjs --headed",
+    "perf:run:5": "node scripts/run-duration.mjs --duration 5",
+    "perf:run:5:headed": "node scripts/run-duration.mjs --duration 5 --headed",
+    "perf:run:10": "node scripts/run-duration.mjs --duration 10",
+    "perf:run:10:headed": "node scripts/run-duration.mjs --duration 10 --headed",
+    "perf:run:30": "node scripts/run-duration.mjs --duration 30",
+    "perf:run:30:headed": "node scripts/run-duration.mjs --duration 30 --headed",
+    "perf:report": "node scripts/generate-report.mjs",
+    "perf:full": "node scripts/run-duration.mjs && node scripts/generate-report.mjs",
+    "perf:full:headed": "node scripts/run-duration.mjs --headed && node scripts/generate-report.mjs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Kishore-chilakala/DRT_ECOLONE_OLD_SCRIPPTS.git"
-  },
-  "keywords": [
-    "playwright",
-    "automation",
-    "ecolane",
-    "drt",
-    "e2e",
-    "typescript"
-  ],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.52.0",
-    "@types/node": "^22.15.29",
-    "typescript": "^5.8.3"
-  },
-  "bugs": {
-    "url": "https://github.com/Kishore-chilakala/DRT_ECOLONE_OLD_SCRIPPTS/issues"
-  },
-  "homepage": "https://github.com/Kishore-chilakala/DRT_ECOLONE_OLD_SCRIPPTS#readme"
+    "@playwright/test": "^1.61.0",
+    "@types/node": "^20.19.43",
+    "typescript": "^5.9.3"
+  }
 }

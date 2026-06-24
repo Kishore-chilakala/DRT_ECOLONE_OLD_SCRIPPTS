@@ -1,45 +1,46 @@
 # Active Context
 
 ## Current Work Focus
-Running Playwright automation tests for eColane DRT Platform across 5 scenarios.
+Initial project scaffolding — setting up the Playwright E2E performance testing project from scratch.
 
-## Recent Changes
-- Created `tests/all-scenarios.spec.ts` — single TypeScript file with all 5 scenarios
-- Installed TypeScript and @types/node
-- Created tsconfig.json for TypeScript support
-- Fixed navigation: click menu button → wait 600ms → click menuitem (NO menu container assertion)
-- Added `clickMenuThenItem()` helper to handle Bootstrap-style dropdown menus
-- Added extra `waitForTimeout(3000)` after navigation for page content to render
-- Added console.log debugging for URL and page content
+## What Was Just Done
+1. Created `package.json` with all npm scripts
+2. Created `tsconfig.json` with TypeScript configuration
+3. Created `playwright.config.ts` — Chromium, headed, single-worker, HTML+JSON reporters
+4. Created `tests/helpers/perfHelper.ts` — full Performance API measurement utility
+5. Created `tests/e2e.spec.ts` — main test file with codegen integration guide
+6. Created `scripts/codegen.ps1` — PowerShell launcher for `playwright codegen`
+7. Created `.gitignore`
+8. Installed npm dependencies: `@playwright/test`, `@types/node`, `typescript`
+9. Running `npx playwright install chromium` to download browser binary
 
-## Key Findings
-- App URL: https://qa-react.ecolane.com/drt/
-- Clients page: https://qa-react.ecolane.com/drt/pages/customers
-- Navigation buttons (codegen-validated):
-  - `getByRole('button', { name: 'Administration' })` → `getByRole('menuitem', { name: 'Clients' })`
-  - `getByRole('button', { name: 'New client' })` (to create client)
-  - `getByRole('button', { name: 'Operations' })` → `getByRole('menuitem', { name: 'Schedules', exact: true })`
-  - `getByRole('button', { name: 'Optimize schedules' })`
-  - `getByRole('button', { name: 'Operations' })` → `getByRole('menuitem', { name: 'Messages' })`
-  - `getByRole('button', { name: 'Send message' })` / `data-testid="new-alert-button"`
-- The `[role="menu"]` container is hidden by CSS — must NOT assert it visible
-- TC-NS-001 ✓ PASSED
-- TC-NS-002 ✓ PASSED (urlChanged = true)
-- TC-NS-003 → running
-- TC-NS-004b/c/d ✓ PASSED (graceful - no trips to review)
+## Next Steps (for developer)
+1. **Wait for Chromium install to finish** (Terminal 2)
+2. **Start your React app dev server** (e.g. `npm start` in React project — separate terminal)
+3. **Set BASE_URL** if not `localhost:3000`:
+   ```powershell
+   $env:BASE_URL = "http://localhost:YOUR_PORT"
+   ```
+4. **Run codegen** to record your user flow:
+   ```powershell
+   npm run codegen
+   # or for saving directly to a file:
+   npm run codegen:record
+   # or use the PowerShell script with instructions:
+   .\scripts\codegen.ps1
+   ```
+5. **Paste recorded actions** into `measureRender()` blocks in `tests/e2e.spec.ts`
+6. **Run the test**: `npm test`
+7. **View the HTML report**: `npm run report`
 
-## Test Results History
-- Run 1: 5 passed, 3 failed (new-trip-button, optimize-schedules-button, new-alert-button)
-- Run 2: 1 passed, 7 failed (menu container assertion timeout)
-- Run 3: 4 passed, 4 failed (menu container assertion timeout - same)
-- Run 4: CURRENT - TC-NS-001 ✓, TC-NS-002 ✓, TC-NS-003 running...
+## Active Decisions
+- `headless: false` chosen for realistic visual rendering measurement
+- `workers: 1` to eliminate CPU noise from parallel test runs
+- `networkidle` as default wait strategy — appropriate for React apps with async data fetches
+- Slow threshold set to **300ms** per action (configurable in `perfHelper.ts` `buildReport()`)
+- `performance.mark/measure` used instead of `Date.now()` for browser-native sub-ms accuracy
 
-## Credentials
-- Username: eco_eraju1
-- Password: Ecolane#drt123
-
-## Key File Locations
-- Main Test: tests/all-scenarios.spec.ts
-- Config: tests/config/testData.js
-- Pages: tests/pages/*.js
-- Reports: playwright-report/
+## Known Issues / Workarounds
+- `npm init playwright@latest` interactive wizard got stuck — switched to manual file creation
+- TS errors for `@playwright/test` / `process` are expected before `npm install` — resolved after install
+- Terminal 1 (`npm init playwright@latest`) may still be running — can be safely ignored/killed

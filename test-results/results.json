@@ -2,14 +2,13 @@
   "config": {
     "argv": [
       "C:\\Program Files\\nodejs\\node.exe",
-      "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\node_modules\\@playwright\\test\\cli.js",
+      "C:\\Users\\sathish.jana\\Downloads\\DRT_FrontEnd_PE_Updated_React\\node_modules\\@playwright\\test\\cli.js",
       "test",
-      "tests/all-scenarios.spec.ts",
-      "--headed",
-      "--timeout=120000"
+      "tests/react-booking-new.spec.ts",
+      "--reporter=line,json"
     ],
-    "configFile": "C:\\Users\\nasarababu.purni\\Desktop\\Drt\\DRT_ECOLONE_OLD_SCRIPPTS\\playwright.config.js",
-    "rootDir": "C:/Users/nasarababu.purni/Desktop/Drt/DRT_ECOLONE_OLD_SCRIPPTS/tests",
+    "configFile": "C:\\Users\\sathish.jana\\Downloads\\DRT_FrontEnd_PE_Updated_React\\playwright.config.ts",
+    "rootDir": "C:/Users/sathish.jana/Downloads/DRT_FrontEnd_PE_Updated_React/tests",
     "failOnFlakyTests": false,
     "forbidOnly": false,
     "fullyParallel": false,
@@ -25,15 +24,15 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "C:/Users/nasarababu.purni/Desktop/Drt/DRT_ECOLONE_OLD_SCRIPPTS/test-results",
+        "outputDir": "C:/Users/sathish.jana/Downloads/DRT_FrontEnd_PE_Updated_React/test-results",
         "repeatEach": 1,
-        "retries": 1,
+        "retries": 0,
         "metadata": {
           "actualWorkers": 1
         },
         "id": "chromium",
         "name": "chromium",
-        "testDir": "C:/Users/nasarababu.purni/Desktop/Drt/DRT_ECOLONE_OLD_SCRIPPTS/tests",
+        "testDir": "C:/Users/sathish.jana/Downloads/DRT_FrontEnd_PE_Updated_React/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -44,21 +43,10 @@
     "quiet": false,
     "reporter": [
       [
-        "html",
-        {
-          "outputFolder": "playwright-report",
-          "open": "never"
-        }
+        "line"
       ],
       [
-        "list",
-        null
-      ],
-      [
-        "json",
-        {
-          "outputFile": "test-results/results.json"
-        }
+        "json"
       ]
     ],
     "reportSlowTests": {
@@ -75,25 +63,25 @@
   },
   "suites": [
     {
-      "title": "all-scenarios.spec.ts",
-      "file": "all-scenarios.spec.ts",
+      "title": "react-booking-new.spec.ts",
+      "file": "react-booking-new.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Scenario 1: Login Functionality",
-          "file": "all-scenarios.spec.ts",
-          "line": 114,
+          "title": "React Front-End – Full Trip Booking Flow",
+          "file": "react-booking-new.spec.ts",
+          "line": 40,
           "column": 6,
           "specs": [
             {
-              "title": "TC-NS-001: Login to eColane DRT Platform and verify session is active",
+              "title": "Login → Administration → Clients → New Client → Book Trip → Messages → Logout",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
+                  "timeout": 300000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
@@ -103,348 +91,294 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 23299,
+                      "duration": 105913,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "[TC-NS-001] ✓ Session active. URL: https://qa-react.ecolane.com/drt/\n"
+                          "text": "[PERF] login-form-visible: 63.10ms | Long Tasks: 6 | CLS: 0.0000\n"
+                        },
+                        {
+                          "text": "[PERF] fill-username: 93.20ms | Long Tasks: 6 | CLS: 0.0000\n"
+                        },
+                        {
+                          "text": "[PERF] fill-password: 104.20ms | Long Tasks: 6 | CLS: 0.0000\n"
+                        },
+                        {
+                          "text": "[PERF] sign-in: 4606.83ms | Long Tasks: 4 | CLS: 0.0016\n"
+                        },
+                        {
+                          "text": "[PERF] open-administration-menu: 76.20ms | Long Tasks: 4 | CLS: 0.0016\n"
+                        },
+                        {
+                          "text": "[PERF] clients-list-load: 3086.34ms | Long Tasks: 3 | CLS: 0.0016\n"
+                        },
+                        {
+                          "text": "[PERF] open-new-client-form: 2562.36ms | Long Tasks: 4 | CLS: 0.0000\n"
+                        },
+                        {
+                          "text": "[PERF] select-client-title: 39.40ms | Long Tasks: 4 | CLS: 0.0000\n"
+                        },
+                        {
+                          "text": "[PERF] fill-client-name: 188.70ms | Long Tasks: 4 | CLS: 0.0000\n"
+                        },
+                        {
+                          "text": "[PERF] set-additional-loading-time: 224.70ms | Long Tasks: 4 | CLS: 0.0017\n"
+                        },
+                        {
+                          "text": "[PERF] create-new-client: 3418.60ms | Long Tasks: 3 | CLS: 0.0016\n"
+                        },
+                        {
+                          "text": "[PERF] clients-list-load: 2521.48ms | Long Tasks: 3 | CLS: 0.0017\n"
+                        },
+                        {
+                          "text": "[PERF] search-client-by-id: 1147.80ms | Long Tasks: 4 | CLS: 0.0017\n"
+                        },
+                        {
+                          "text": "[PERF] open-new-trip: 4029.25ms | Long Tasks: 3 | CLS: 0.0016\n"
+                        },
+                        {
+                          "text": "[PERF] search-pickup-location: 1304.40ms | Long Tasks: 5 | CLS: 0.0016\n"
+                        },
+                        {
+                          "text": "[PERF] select-pickup-address: 109.20ms | Long Tasks: 5 | CLS: 0.0078\n"
+                        },
+                        {
+                          "text": "[PERF] fill-pickup-notes: 114.30ms | Long Tasks: 5 | CLS: 0.0078\n"
+                        },
+                        {
+                          "text": "[PERF] search-dropoff-location: 1166.70ms | Long Tasks: 5 | CLS: 0.0524\n"
+                        },
+                        {
+                          "text": "[PERF] select-dropoff-address: 70.20ms | Long Tasks: 5 | CLS: 0.0545\n"
+                        },
+                        {
+                          "text": "[PERF] fill-dropoff-notes: 122.20ms | Long Tasks: 5 | CLS: 0.0545\n"
+                        },
+                        {
+                          "text": "[PERF] open-calendar: 151.30ms | Long Tasks: 6 | CLS: 0.0545\n"
+                        },
+                        {
+                          "text": "[PERF] select-date-19: 117.00ms | Long Tasks: 6 | CLS: 0.0597\n"
+                        },
+                        {
+                          "text": "[PERF] fill-outbound-time: 101.40ms | Long Tasks: 6 | CLS: 0.0597\n"
+                        },
+                        {
+                          "text": "[PERF] preview-and-book: 8033.04ms | Long Tasks: 5 | CLS: 0.0000\n"
+                        },
+                        {
+                          "text": "[PERF] confirm-trip-booking: 1522.70ms | Long Tasks: 6 | CLS: 0.0016\n"
+                        },
+                        {
+                          "text": "[PERF] clients-list-load: 2659.06ms | Long Tasks: 3 | CLS: 0.0016\n"
+                        },
+                        {
+                          "text": "[PERF] open-operations-menu: 83.20ms | Long Tasks: 3 | CLS: 0.0016\n"
+                        },
+                        {
+                          "text": "[PERF] navigate-to-messages: 2599.63ms | Long Tasks: 3 | CLS: 0.0016\n"
+                        },
+                        {
+                          "text": "[PERF] open-send-message-form: 494.60ms | Long Tasks: 3 | CLS: 0.0168\n"
+                        },
+                        {
+                          "text": "[PERF] select-vehicle: 576.60ms | Long Tasks: 3 | CLS: 0.0168\n"
+                        },
+                        {
+                          "text": "[PERF] select-provider-vehicle: 632.90ms | Long Tasks: 3 | CLS: 0.0960\n"
+                        },
+                        {
+                          "text": "[PERF] select-message-template: 244.50ms | Long Tasks: 3 | CLS: 0.0960\n"
+                        },
+                        {
+                          "text": "[PERF] send-message: 472.50ms | Long Tasks: 3 | CLS: 0.1382\n"
+                        },
+                        {
+                          "text": "[PERF] open-user-menu: 74.40ms | Long Tasks: 3 | CLS: 0.1382\n"
+                        },
+                        {
+                          "text": "[PERF] sign-out: 1786.58ms | Long Tasks: 3 | CLS: 0.0000\n"
+                        },
+                        {
+                          "text": "\n========================================\n"
+                        },
+                        {
+                          "text": "  FRONTEND RENDERING PERFORMANCE REPORT \n"
+                        },
+                        {
+                          "text": "========================================\n"
+                        },
+                        {
+                          "text": "URL: https://qa-react.ecolane.com/drt\n"
+                        },
+                        {
+                          "text": "\n--- Navigation Timing ---\n"
+                        },
+                        {
+                          "text": "  DOM Content Loaded : 4518.50 ms\n"
+                        },
+                        {
+                          "text": "  Load Event         : 5958.40 ms\n"
+                        },
+                        {
+                          "text": "  DOM Interactive    : 3144.80 ms\n"
+                        },
+                        {
+                          "text": "  First Byte (TTFB)  : 352.50 ms\n"
+                        },
+                        {
+                          "text": "\n--- Per-Action Render Times ---\n"
+                        },
+                        {
+                          "text": "  [login-form-visible]\n    Duration      : 63.10 ms\n    Long Tasks    : 6\n    CLS Score     : 0.0000\n\n"
+                        },
+                        {
+                          "text": "  [fill-username]\n    Duration      : 93.20 ms\n    Long Tasks    : 6\n    CLS Score     : 0.0000\n\n"
+                        },
+                        {
+                          "text": "  [fill-password]\n    Duration      : 104.20 ms\n    Long Tasks    : 6\n    CLS Score     : 0.0000\n\n"
+                        },
+                        {
+                          "text": "  [sign-in] ⚠️  SLOW\n    Duration      : 4606.83 ms\n    Long Tasks    : 4\n    CLS Score     : 0.0016\n\n"
+                        },
+                        {
+                          "text": "  [open-administration-menu]\n    Duration      : 76.20 ms\n    Long Tasks    : 4\n    CLS Score     : 0.0016\n\n"
+                        },
+                        {
+                          "text": "  [clients-list-load] ⚠️  SLOW\n    Duration      : 3086.34 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0016\n\n"
+                        },
+                        {
+                          "text": "  [open-new-client-form] ⚠️  SLOW\n    Duration      : 2562.36 ms\n    Long Tasks    : 4\n    CLS Score     : 0.0000\n\n"
+                        },
+                        {
+                          "text": "  [select-client-title]\n    Duration      : 39.40 ms\n    Long Tasks    : 4\n    CLS Score     : 0.0000\n\n"
+                        },
+                        {
+                          "text": "  [fill-client-name]\n    Duration      : 188.70 ms\n    Long Tasks    : 4\n    CLS Score     : 0.0000\n\n"
+                        },
+                        {
+                          "text": "  [set-additional-loading-time]\n    Duration      : 224.70 ms\n    Long Tasks    : 4\n    CLS Score     : 0.0017\n\n"
+                        },
+                        {
+                          "text": "  [create-new-client] ⚠️  SLOW\n    Duration      : 3418.60 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0016\n\n"
+                        },
+                        {
+                          "text": "  [clients-list-load] ⚠️  SLOW\n    Duration      : 2521.48 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0017\n\n"
+                        },
+                        {
+                          "text": "  [search-client-by-id] ⚠️  SLOW\n    Duration      : 1147.80 ms\n    Long Tasks    : 4\n    CLS Score     : 0.0017\n\n"
+                        },
+                        {
+                          "text": "  [open-new-trip] ⚠️  SLOW\n    Duration      : 4029.25 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0016\n\n"
+                        },
+                        {
+                          "text": "  [search-pickup-location] ⚠️  SLOW\n    Duration      : 1304.40 ms\n    Long Tasks    : 5\n    CLS Score     : 0.0016\n\n"
+                        },
+                        {
+                          "text": "  [select-pickup-address]\n    Duration      : 109.20 ms\n    Long Tasks    : 5\n    CLS Score     : 0.0078\n\n"
+                        },
+                        {
+                          "text": "  [fill-pickup-notes]\n    Duration      : 114.30 ms\n    Long Tasks    : 5\n    CLS Score     : 0.0078\n\n"
+                        },
+                        {
+                          "text": "  [search-dropoff-location] ⚠️  SLOW\n    Duration      : 1166.70 ms\n    Long Tasks    : 5\n    CLS Score     : 0.0524\n\n"
+                        },
+                        {
+                          "text": "  [select-dropoff-address]\n    Duration      : 70.20 ms\n    Long Tasks    : 5\n    CLS Score     : 0.0545\n\n"
+                        },
+                        {
+                          "text": "  [fill-dropoff-notes]\n    Duration      : 122.20 ms\n    Long Tasks    : 5\n    CLS Score     : 0.0545\n\n"
+                        },
+                        {
+                          "text": "  [open-calendar]\n    Duration      : 151.30 ms\n    Long Tasks    : 6\n    CLS Score     : 0.0545\n\n"
+                        },
+                        {
+                          "text": "  [select-date-19]\n    Duration      : 117.00 ms\n    Long Tasks    : 6\n    CLS Score     : 0.0597\n\n"
+                        },
+                        {
+                          "text": "  [fill-outbound-time]\n    Duration      : 101.40 ms\n    Long Tasks    : 6\n    CLS Score     : 0.0597\n\n"
+                        },
+                        {
+                          "text": "  [preview-and-book] ⚠️  SLOW\n    Duration      : 8033.04 ms\n    Long Tasks    : 5\n    CLS Score     : 0.0000\n\n"
+                        },
+                        {
+                          "text": "  [confirm-trip-booking] ⚠️  SLOW\n    Duration      : 16841.69 ms\n    Long Tasks    : 6\n    CLS Score     : 0.0016\n\n"
+                        },
+                        {
+                          "text": "  [clients-list-load] ⚠️  SLOW\n    Duration      : 2659.06 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0016\n\n"
+                        },
+                        {
+                          "text": "  [open-operations-menu]\n    Duration      : 83.20 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0016\n\n"
+                        },
+                        {
+                          "text": "  [navigate-to-messages] ⚠️  SLOW\n    Duration      : 2599.63 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0016\n\n"
+                        },
+                        {
+                          "text": "  [open-send-message-form] ⚠️  SLOW\n    Duration      : 494.60 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0168\n\n"
+                        },
+                        {
+                          "text": "  [select-vehicle] ⚠️  SLOW\n    Duration      : 576.60 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0168\n\n"
+                        },
+                        {
+                          "text": "  [select-provider-vehicle] ⚠️  SLOW\n    Duration      : 632.90 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0960\n\n"
+                        },
+                        {
+                          "text": "  [select-message-template]\n    Duration      : 244.50 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0960\n\n"
+                        },
+                        {
+                          "text": "  [send-message] ⚠️  SLOW\n    Duration      : 472.50 ms\n    Long Tasks    : 3\n    CLS Score     : 0.1382\n\n"
+                        },
+                        {
+                          "text": "  [open-user-menu]\n    Duration      : 74.40 ms\n    Long Tasks    : 3\n    CLS Score     : 0.1382\n\n"
+                        },
+                        {
+                          "text": "  [sign-out] ⚠️  SLOW\n    Duration      : 1786.58 ms\n    Long Tasks    : 3\n    CLS Score     : 0.0000\n\n"
+                        },
+                        {
+                          "text": "--- Summary ---\n"
+                        },
+                        {
+                          "text": "  Total Actions    : 35\n"
+                        },
+                        {
+                          "text": "  Avg Render Time  : 1711.93 ms\n"
+                        },
+                        {
+                          "text": "  Max Render Time  : 16841.69 ms\n"
+                        },
+                        {
+                          "text": "  Min Render Time  : 39.4 ms\n"
+                        },
+                        {
+                          "text": "  ⚠️  Slow Actions  : sign-in, clients-list-load, open-new-client-form, create-new-client, clients-list-load, search-client-by-id, open-new-trip, search-pickup-location, search-dropoff-location, preview-and-book, confirm-trip-booking, clients-list-load, navigate-to-messages, open-send-message-form, select-vehicle, select-provider-vehicle, send-message, sign-out\n"
+                        },
+                        {
+                          "text": "========================================\n\n"
                         }
                       ],
-                      "stderr": [],
+                      "stderr": [
+                        {
+                          "text": "⚠️  Average render time 1711.93ms exceeds soft threshold of 1000ms\n"
+                        }
+                      ],
                       "retry": 0,
-                      "startTime": "2026-06-19T05:22:38.506Z",
+                      "startTime": "2026-06-19T15:35:39.906Z",
                       "annotations": [],
-                      "attachments": []
+                      "attachments": [
+                        {
+                          "name": "performance-report.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJ1cmwiOiAiaHR0cHM6Ly9xYS1yZWFjdC5lY29sYW5lLmNvbS9kcnQiLAogICJ0aW1pbmdzIjogWwogICAgewogICAgICAiYWN0aW9uIjogImxvZ2luLWZvcm0tdmlzaWJsZSIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzMzQ3NDc1LAogICAgICAiZHVyYXRpb24iOiA2My4wOTk5OTk5OTc3NjQ4MjYsCiAgICAgICJsb25nVGFza0NvdW50IjogNiwKICAgICAgInBhaW50RW50cmllcyI6IFsKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMzE4NAogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtY29udGVudGZ1bC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMzE4NAogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAwMDAwNjI5MDg1OTY0NjI2NzM2MgogICAgfSwKICAgIHsKICAgICAgImFjdGlvbiI6ICJmaWxsLXVzZXJuYW1lIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODMzNDc1NzgsCiAgICAgICJkdXJhdGlvbiI6IDkzLjE5OTk5OTk5OTI1NDk0LAogICAgICAibG9uZ1Rhc2tDb3VudCI6IDYsCiAgICAgICJwYWludEVudHJpZXMiOiBbCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDMxODQKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDMxODQKICAgICAgICB9CiAgICAgIF0sCiAgICAgICJsYXlvdXRTaGlmdFNjb3JlIjogMC4wMDAwMDYyOTA4NTk2NDYyNjczNjIKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAiZmlsbC1wYXNzd29yZCIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzMzQ3NzAyLAogICAgICAiZHVyYXRpb24iOiAxMDQuMTk5OTk5OTk5MjU0OTQsCiAgICAgICJsb25nVGFza0NvdW50IjogNiwKICAgICAgInBhaW50RW50cmllcyI6IFsKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMzE4NAogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtY29udGVudGZ1bC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMzE4NAogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAwMDAwNjI5MDg1OTY0NjI2NzM2MgogICAgfSwKICAgIHsKICAgICAgImFjdGlvbiI6ICJzaWduLWluIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODMzNTIzMjQsCiAgICAgICJkdXJhdGlvbiI6IDQ2MDYuODI3ODAwMDAwMDAxLAogICAgICAibG9uZ1Rhc2tDb3VudCI6IDQsCiAgICAgICJwYWludEVudHJpZXMiOiBbCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDE2NDgKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDE2NDgKICAgICAgICB9CiAgICAgIF0sCiAgICAgICJsYXlvdXRTaGlmdFNjb3JlIjogMC4wMDE2MDg2NzU0Nzk4ODg5MTU5CiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogIm9wZW4tYWRtaW5pc3RyYXRpb24tbWVudSIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzMzU0NDE0LAogICAgICAiZHVyYXRpb24iOiA3Ni4xOTk5OTk5OTkyNTQ5NCwKICAgICAgImxvbmdUYXNrQ291bnQiOiA0LAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxNjQ4CiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1jb250ZW50ZnVsLXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxNjQ4CiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAuMDAxNjA4Njc1NDc5ODg4OTE1OQogICAgfSwKICAgIHsKICAgICAgImFjdGlvbiI6ICJjbGllbnRzLWxpc3QtbG9hZCIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzMzU3NTIwLAogICAgICAiZHVyYXRpb24iOiAzMDg2LjMzODEwMDAwMDAwMSwKICAgICAgImxvbmdUYXNrQ291bnQiOiAzLAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiA1MTYKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDUxNgogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAwMTYwNzk3MjE0NTA4MDU2NjUKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAib3Blbi1uZXctY2xpZW50LWZvcm0iLAogICAgICAic3RhcnRUaW1lIjogMTc4MTg4MzM2MjE1NSwKICAgICAgImR1cmF0aW9uIjogMjU2Mi4zNTk3OTk5OTk5OTg0LAogICAgICAibG9uZ1Rhc2tDb3VudCI6IDQsCiAgICAgICJwYWludEVudHJpZXMiOiBbCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDE4OTYKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDE4OTYKICAgICAgICB9CiAgICAgIF0sCiAgICAgICJsYXlvdXRTaGlmdFNjb3JlIjogMAogICAgfSwKICAgIHsKICAgICAgImFjdGlvbiI6ICJzZWxlY3QtY2xpZW50LXRpdGxlIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODMzNjIyMDUsCiAgICAgICJkdXJhdGlvbiI6IDM5LjM5OTk5OTk5ODUwOTg4NCwKICAgICAgImxvbmdUYXNrQ291bnQiOiA0LAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxODk2CiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1jb250ZW50ZnVsLXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxODk2CiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAiZmlsbC1jbGllbnQtbmFtZSIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzMzYyNDA0LAogICAgICAiZHVyYXRpb24iOiAxODguNzAwMDAwMDAyOTgwMjMsCiAgICAgICJsb25nVGFza0NvdW50IjogNCwKICAgICAgInBhaW50RW50cmllcyI6IFsKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMTg5NgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtY29udGVudGZ1bC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMTg5NgogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwCiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogInNldC1hZGRpdGlvbmFsLWxvYWRpbmctdGltZSIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzMzYyNjM5LAogICAgICAiZHVyYXRpb24iOiAyMjQuNjk5OTk5OTk5MjU0OTQsCiAgICAgICJsb25nVGFza0NvdW50IjogNCwKICAgICAgInBhaW50RW50cmllcyI6IFsKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMTg5NgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtY29udGVudGZ1bC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMTg5NgogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAwMTcwMTAyNjkxNjUwMzkwNjIKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAiY3JlYXRlLW5ldy1jbGllbnQiLAogICAgICAic3RhcnRUaW1lIjogMTc4MTg4MzM2ODA4OCwKICAgICAgImR1cmF0aW9uIjogMzQxOC42MDMyMDAwMDAwMDE0LAogICAgICAibG9uZ1Rhc2tDb3VudCI6IDMsCiAgICAgICJwYWludEVudHJpZXMiOiBbCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDExMjQKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDExMjQKICAgICAgICB9CiAgICAgIF0sCiAgICAgICJsYXlvdXRTaGlmdFNjb3JlIjogMC4wMDE2MDg2NzU0Nzk4ODg5MTU5CiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogImNsaWVudHMtbGlzdC1sb2FkIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODMzNzI2NDMsCiAgICAgICJkdXJhdGlvbiI6IDI1MjEuNDgwNTAwMDAwMDAxNSwKICAgICAgImxvbmdUYXNrQ291bnQiOiAzLAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiA0MzYKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDQzNgogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAwMTcwMTAyNjkxNjUwMzkwNjIKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAic2VhcmNoLWNsaWVudC1ieS1pZCIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzMzc1ODE0LAogICAgICAiZHVyYXRpb24iOiAxMTQ3LjgwMDAwMDAwMDc0NSwKICAgICAgImxvbmdUYXNrQ291bnQiOiA0LAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiA0MzYKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDQzNgogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAwMTcwMTAyNjkxNjUwMzkwNjIKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAib3Blbi1uZXctdHJpcCIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzMzgxODc5LAogICAgICAiZHVyYXRpb24iOiA0MDI5LjI1NDYsCiAgICAgICJsb25nVGFza0NvdW50IjogMywKICAgICAgInBhaW50RW50cmllcyI6IFsKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMTMwMAogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtY29udGVudGZ1bC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMTMwMAogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAwMTYwNzk3MjE0NTA4MDU2NjUKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAic2VhcmNoLXBpY2t1cC1sb2NhdGlvbiIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzMzgzMTkzLAogICAgICAiZHVyYXRpb24iOiAxMzA0LjM5OTk5OTk5ODUwOTksCiAgICAgICJsb25nVGFza0NvdW50IjogNSwKICAgICAgInBhaW50RW50cmllcyI6IFsKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMTMwMAogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtY29udGVudGZ1bC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMTMwMAogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAwMTYwNzk3MjE0NTA4MDU2NjUKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAic2VsZWN0LXBpY2t1cC1hZGRyZXNzIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODMzODUzMjIsCiAgICAgICJkdXJhdGlvbiI6IDEwOS4yMDAwMDAwMDI5ODAyMywKICAgICAgImxvbmdUYXNrQ291bnQiOiA1LAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1jb250ZW50ZnVsLXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAuMDA3ODI3ODUxMjk1NDcxMTkxCiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogImZpbGwtcGlja3VwLW5vdGVzIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODMzODc0NTYsCiAgICAgICJkdXJhdGlvbiI6IDExNC4zMDAwMDAwMDA3NDUwNiwKICAgICAgImxvbmdUYXNrQ291bnQiOiA1LAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1jb250ZW50ZnVsLXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAuMDA3ODI3ODUxMjk1NDcxMTkxCiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogInNlYXJjaC1kcm9wb2ZmLWxvY2F0aW9uIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODMzOTA2NDEsCiAgICAgICJkdXJhdGlvbiI6IDExNjYuNjk5OTk5OTk5MjU1LAogICAgICAibG9uZ1Rhc2tDb3VudCI6IDUsCiAgICAgICJwYWludEVudHJpZXMiOiBbCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDEzMDAKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDEzMDAKICAgICAgICB9CiAgICAgIF0sCiAgICAgICJsYXlvdXRTaGlmdFNjb3JlIjogMC4wNTIzODk2MTg4NzM1OTYxOTQKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAic2VsZWN0LWRyb3BvZmYtYWRkcmVzcyIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzMzkyNzMwLAogICAgICAiZHVyYXRpb24iOiA3MC4xOTk5OTk5OTkyNTQ5NCwKICAgICAgImxvbmdUYXNrQ291bnQiOiA1LAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1jb250ZW50ZnVsLXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAuMDU0NTQzNTk1MzE0MDI1ODgKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAiZmlsbC1kcm9wb2ZmLW5vdGVzIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODMzOTQ4NjgsCiAgICAgICJkdXJhdGlvbiI6IDEyMi4xOTk5OTk5OTkyNTQ5NCwKICAgICAgImxvbmdUYXNrQ291bnQiOiA1LAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1jb250ZW50ZnVsLXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAuMDU0NTQzNTk1MzE0MDI1ODgKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAib3Blbi1jYWxlbmRhciIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzMzk3MDQzLAogICAgICAiZHVyYXRpb24iOiAxNTEuMjk5OTk5OTk3MDE5NzcsCiAgICAgICJsb25nVGFza0NvdW50IjogNiwKICAgICAgInBhaW50RW50cmllcyI6IFsKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMTMwMAogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtY29udGVudGZ1bC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogMTMwMAogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjA1NDU0MzU5NTMxNDAyNTg4CiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogInNlbGVjdC1kYXRlLTE5IiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODMzOTkyMzUsCiAgICAgICJkdXJhdGlvbiI6IDExNywKICAgICAgImxvbmdUYXNrQ291bnQiOiA2LAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1jb250ZW50ZnVsLXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAuMDU5Njc5MDkzMzYwOTAwODgKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAiZmlsbC1vdXRib3VuZC10aW1lIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODM0MDEzNTQsCiAgICAgICJkdXJhdGlvbiI6IDEwMS40MDAwMDAwMDIyMzUxNywKICAgICAgImxvbmdUYXNrQ291bnQiOiA2LAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1jb250ZW50ZnVsLXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxMzAwCiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAuMDU5Njc5MDkzMzYwOTAwODgKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAicHJldmlldy1hbmQtYm9vayIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzNDExNDg3LAogICAgICAiZHVyYXRpb24iOiA4MDMzLjAzODc5OTk5OTk5NSwKICAgICAgImxvbmdUYXNrQ291bnQiOiA1LAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiA3NTMyCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1jb250ZW50ZnVsLXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiA3NTMyCiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAiY29uZmlybS10cmlwLWJvb2tpbmciLAogICAgICAic3RhcnRUaW1lIjogMTc4MTg4MzQxMzUzMCwKICAgICAgImR1cmF0aW9uIjogMTY4NDEuNjkzMzk5OTk4NTA1LAogICAgICAibG9uZ1Rhc2tDb3VudCI6IDYsCiAgICAgICJwYWludEVudHJpZXMiOiBbCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDc1MzIKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDc1MzIKICAgICAgICB9CiAgICAgIF0sCiAgICAgICJsYXlvdXRTaGlmdFNjb3JlIjogMC4wMDE2MDg2NzU0Nzk4ODg5MTU5CiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogImNsaWVudHMtbGlzdC1sb2FkIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODM0MTgyMjksCiAgICAgICJkdXJhdGlvbiI6IDI2NTkuMDU3NDk5OTk5OTk1MywKICAgICAgImxvbmdUYXNrQ291bnQiOiAzLAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiA0NjAKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDQ2MAogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAwMTYwNzk3MjE0NTA4MDU2NjUKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAib3Blbi1vcGVyYXRpb25zLW1lbnUiLAogICAgICAic3RhcnRUaW1lIjogMTc4MTg4MzQyMDM0MiwKICAgICAgImR1cmF0aW9uIjogODMuMjAwMDAwMDAyOTgwMjMsCiAgICAgICJsb25nVGFza0NvdW50IjogMywKICAgICAgInBhaW50RW50cmllcyI6IFsKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogNDYwCiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1jb250ZW50ZnVsLXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiA0NjAKICAgICAgICB9CiAgICAgIF0sCiAgICAgICJsYXlvdXRTaGlmdFNjb3JlIjogMC4wMDE2MDc5NzIxNDUwODA1NjY1CiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogIm5hdmlnYXRlLXRvLW1lc3NhZ2VzIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODM0MjI5NTgsCiAgICAgICJkdXJhdGlvbiI6IDI1OTkuNjMxMDAwMDAwMDA4NSwKICAgICAgImxvbmdUYXNrQ291bnQiOiAzLAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiA0NDgKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDQ0OAogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAwMTYwODY3NTQ3OTg4ODkxNTkKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAib3Blbi1zZW5kLW1lc3NhZ2UtZm9ybSIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzNDI1NDY3LAogICAgICAiZHVyYXRpb24iOiA0OTQuNTk5OTk5OTk3NzY0OCwKICAgICAgImxvbmdUYXNrQ291bnQiOiAzLAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiA0NDgKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDQ0OAogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAxNjgyNTc0MTI5MTA0NjE0NAogICAgfSwKICAgIHsKICAgICAgImFjdGlvbiI6ICJzZWxlY3QtdmVoaWNsZSIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzNDI4MDY2LAogICAgICAiZHVyYXRpb24iOiA1NzYuNjAwMDAwMDAxNDkwMSwKICAgICAgImxvbmdUYXNrQ291bnQiOiAzLAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiA0NDgKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDQ0OAogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjAxNjgyNTc0MTI5MTA0NjE0NAogICAgfSwKICAgIHsKICAgICAgImFjdGlvbiI6ICJzZWxlY3QtcHJvdmlkZXItdmVoaWNsZSIsCiAgICAgICJzdGFydFRpbWUiOiAxNzgxODgzNDMwNzEyLAogICAgICAiZHVyYXRpb24iOiA2MzIuODk5OTk5OTk4NTA5OSwKICAgICAgImxvbmdUYXNrQ291bnQiOiAzLAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiA0NDgKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LWNvbnRlbnRmdWwtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDQ0OAogICAgICAgIH0KICAgICAgXSwKICAgICAgImxheW91dFNoaWZ0U2NvcmUiOiAwLjA5NTk2MDIzNzM0NDEwNjA1CiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogInNlbGVjdC1tZXNzYWdlLXRlbXBsYXRlIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODM0MzI5NzEsCiAgICAgICJkdXJhdGlvbiI6IDI0NC41LAogICAgICAibG9uZ1Rhc2tDb3VudCI6IDMsCiAgICAgICJwYWludEVudHJpZXMiOiBbCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDQ0OAogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtY29udGVudGZ1bC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogNDQ4CiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAuMDk1OTYwMjM3MzQ0MTA2MDUKICAgIH0sCiAgICB7CiAgICAgICJhY3Rpb24iOiAic2VuZC1tZXNzYWdlIiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODM0MzU0NjAsCiAgICAgICJkdXJhdGlvbiI6IDQ3Mi41LAogICAgICAibG9uZ1Rhc2tDb3VudCI6IDMsCiAgICAgICJwYWludEVudHJpZXMiOiBbCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDQ0OAogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtY29udGVudGZ1bC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogNDQ4CiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAuMTM4MTk2MDQ4ODk1NTE4CiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogIm9wZW4tdXNlci1tZW51IiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODM0Mzc1NTQsCiAgICAgICJkdXJhdGlvbiI6IDc0LjM5OTk5OTk5ODUwOTg4LAogICAgICAibG9uZ1Rhc2tDb3VudCI6IDMsCiAgICAgICJwYWludEVudHJpZXMiOiBbCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtcGFpbnQiLAogICAgICAgICAgInN0YXJ0VGltZSI6IDQ0OAogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgIm5hbWUiOiAiZmlyc3QtY29udGVudGZ1bC1wYWludCIsCiAgICAgICAgICAic3RhcnRUaW1lIjogNDQ4CiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAuMTM4MTk2MDQ4ODk1NTE4CiAgICB9LAogICAgewogICAgICAiYWN0aW9uIjogInNpZ24tb3V0IiwKICAgICAgInN0YXJ0VGltZSI6IDE3ODE4ODM0NDEzOTUsCiAgICAgICJkdXJhdGlvbiI6IDE3ODYuNTc1ODk5OTk5OTk2MiwKICAgICAgImxvbmdUYXNrQ291bnQiOiAzLAogICAgICAicGFpbnRFbnRyaWVzIjogWwogICAgICAgIHsKICAgICAgICAgICJuYW1lIjogImZpcnN0LXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxNTE2CiAgICAgICAgfSwKICAgICAgICB7CiAgICAgICAgICAibmFtZSI6ICJmaXJzdC1jb250ZW50ZnVsLXBhaW50IiwKICAgICAgICAgICJzdGFydFRpbWUiOiAxNTE2CiAgICAgICAgfQogICAgICBdLAogICAgICAibGF5b3V0U2hpZnRTY29yZSI6IDAKICAgIH0KICBdLAogICJuYXZpZ2F0aW9uVGltaW5nIjogewogICAgImRvbUNvbnRlbnRMb2FkZWQiOiA0NTE4LjUsCiAgICAibG9hZEV2ZW50IjogNTk1OC4zOTk5OTk5OTg1MSwKICAgICJmaXJzdEJ5dGUiOiAzNTIuNSwKICAgICJkbnNMb29rdXAiOiAwLAogICAgInRjcENvbm5lY3QiOiAwLAogICAgInJlcXVlc3QiOiAzNTIuNSwKICAgICJyZXNwb25zZSI6IDEuNjk5OTk5OTk5MjU0OTQyLAogICAgImRvbUludGVyYWN0aXZlIjogMzE0NC43OTk5OTk5OTcwMTk4CiAgfSwKICAic3VtbWFyeSI6IHsKICAgICJ0b3RhbEFjdGlvbnMiOiAzNSwKICAgICJhdmVyYWdlUmVuZGVyVGltZSI6IDE3MTEuOTMsCiAgICAibWF4UmVuZGVyVGltZSI6IDE2ODQxLjY5LAogICAgIm1pblJlbmRlclRpbWUiOiAzOS40LAogICAgInNsb3dBY3Rpb25zIjogWwogICAgICAic2lnbi1pbiIsCiAgICAgICJjbGllbnRzLWxpc3QtbG9hZCIsCiAgICAgICJvcGVuLW5ldy1jbGllbnQtZm9ybSIsCiAgICAgICJjcmVhdGUtbmV3LWNsaWVudCIsCiAgICAgICJjbGllbnRzLWxpc3QtbG9hZCIsCiAgICAgICJzZWFyY2gtY2xpZW50LWJ5LWlkIiwKICAgICAgIm9wZW4tbmV3LXRyaXAiLAogICAgICAic2VhcmNoLXBpY2t1cC1sb2NhdGlvbiIsCiAgICAgICJzZWFyY2gtZHJvcG9mZi1sb2NhdGlvbiIsCiAgICAgICJwcmV2aWV3LWFuZC1ib29rIiwKICAgICAgImNvbmZpcm0tdHJpcC1ib29raW5nIiwKICAgICAgImNsaWVudHMtbGlzdC1sb2FkIiwKICAgICAgIm5hdmlnYXRlLXRvLW1lc3NhZ2VzIiwKICAgICAgIm9wZW4tc2VuZC1tZXNzYWdlLWZvcm0iLAogICAgICAic2VsZWN0LXZlaGljbGUiLAogICAgICAic2VsZWN0LXByb3ZpZGVyLXZlaGljbGUiLAogICAgICAic2VuZC1tZXNzYWdlIiwKICAgICAgInNpZ24tb3V0IgogICAgXQogIH0KfQ=="
+                        }
+                      ]
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "1a7d409255df0495c2f7-7c015bee4a7a913adf74",
-              "file": "all-scenarios.spec.ts",
-              "line": 116,
-              "column": 7
-            }
-          ]
-        },
-        {
-          "title": "Scenario 2: Create Trip for Client 21879",
-          "file": "all-scenarios.spec.ts",
-          "line": 175,
-          "column": 6,
-          "specs": [
-            {
-              "title": "TC-NS-002: Login → Administration → Clients → 21879 → New Trip → fill → Create",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 180000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 53697,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[TC-NS-002] Clients page URL: https://qa-react.ecolane.com/drt/pages/customers\n"
-                        },
-                        {
-                          "text": "[TC-NS-002] No summary | urlChanged: \u001b[33mtrue\u001b[39m | toast: \u001b[33mfalse\u001b[39m\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-19T05:23:28.257Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1a7d409255df0495c2f7-7906e470e2168c6b390e",
-              "file": "all-scenarios.spec.ts",
-              "line": 177,
-              "column": 7
-            }
-          ]
-        },
-        {
-          "title": "Scenario 3: Create a New Client",
-          "file": "all-scenarios.spec.ts",
-          "line": 352,
-          "column": 6,
-          "specs": [
-            {
-              "title": "TC-NS-003: Login → Administration → Clients → New client → fill → Create",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 120000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 42851,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[TC-NS-003] Clients page URL: https://qa-react.ecolane.com/drt/pages/customers\n"
-                        },
-                        {
-                          "text": "[TC-NS-003] New client form URL: https://qa-react.ecolane.com/drt/pages/customers/new\n"
-                        },
-                        {
-                          "text": "[TC-NS-003] hasClientDetail: \u001b[33mfalse\u001b[39m | redirect: \u001b[33mtrue\u001b[39m | toast: \u001b[33mfalse\u001b[39m\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-19T05:24:22.009Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1a7d409255df0495c2f7-ae58aa69593ccd71638e",
-              "file": "all-scenarios.spec.ts",
-              "line": 354,
-              "column": 7
-            }
-          ]
-        },
-        {
-          "title": "Scenario 4: Batch Optimization",
-          "file": "all-scenarios.spec.ts",
-          "line": 486,
-          "column": 6,
-          "specs": [
-            {
-              "title": "TC-NS-004a: Login → Operations → Schedules → Optimize schedules → Start",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 120000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 27007,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[navigateToSchedules] Schedules page URL: https://qa-react.ecolane.com/drt/pages/routes\n"
-                        },
-                        {
-                          "text": "[TC-NS-004a] ✓ Batch optimization triggered. Success indicator: true\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-19T05:25:04.906Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1a7d409255df0495c2f7-161892995d942ae2b4d3",
-              "file": "all-scenarios.spec.ts",
-              "line": 495,
-              "column": 7
-            },
-            {
-              "title": "TC-NS-004b: Login → Operations → Schedules → Schedule tab → Mark for Review",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 90000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 24683,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[navigateToSchedules] Schedules page URL: https://qa-react.ecolane.com/drt/pages/routes\n"
-                        },
-                        {
-                          "text": "[TC-NS-004b] No \"Mark for Review\" button — no schedulable trips\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-19T05:25:31.945Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1a7d409255df0495c2f7-af39b4bf0ac331150062",
-              "file": "all-scenarios.spec.ts",
-              "line": 554,
-              "column": 7
-            },
-            {
-              "title": "TC-NS-004c: Login → Operations → Schedules → Mark Complete tab → Mark for Review",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 90000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 24006,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[navigateToSchedules] Schedules page URL: https://qa-react.ecolane.com/drt/pages/routes\n"
-                        },
-                        {
-                          "text": "[TC-NS-004c] No \"Mark for Review\" button — no completable trips\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-19T05:25:56.650Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1a7d409255df0495c2f7-21f121d2e5321b8dfd97",
-              "file": "all-scenarios.spec.ts",
-              "line": 599,
-              "column": 7
-            },
-            {
-              "title": "TC-NS-004d: Login → Operations → Schedules → Manual Dispatch tab → Mark for Review",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 90000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 23695,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[navigateToSchedules] Schedules page URL: https://qa-react.ecolane.com/drt/pages/routes\n"
-                        },
-                        {
-                          "text": "[TC-NS-004d] No \"Mark for Review\" button — no dispatchable trips\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-19T05:26:20.679Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1a7d409255df0495c2f7-c6f2d2b04ca840ee3ad9",
-              "file": "all-scenarios.spec.ts",
-              "line": 643,
-              "column": 7
-            }
-          ]
-        },
-        {
-          "title": "Scenario 5: Send Messages",
-          "file": "all-scenarios.spec.ts",
-          "line": 695,
-          "column": 6,
-          "specs": [
-            {
-              "title": "TC-NS-005: Login → Operations → Messages → Send message → fill → Send",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 120000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 25429,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "[TC-NS-005] Messages page URL: https://qa-react.ecolane.com/drt/pages/messages\n"
-                        },
-                        {
-                          "text": "[TC-NS-005] messagesHeading: \u001b[33mtrue\u001b[39m | toast: \u001b[33mfalse\u001b[39m | noError: \u001b[33mtrue\u001b[39m\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-19T05:26:44.397Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1a7d409255df0495c2f7-21a507ee558d56a67936",
-              "file": "all-scenarios.spec.ts",
-              "line": 697,
+              "id": "5d17716a69671e9e0f2f-6ae9e4d5974ad5702e1d",
+              "file": "react-booking-new.spec.ts",
+              "line": 41,
               "column": 7
             }
           ]
@@ -454,9 +388,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-06-19T05:22:36.339Z",
-    "duration": 274261.505,
-    "expected": 8,
+    "startTime": "2026-06-19T15:35:39.014Z",
+    "duration": 107951.963,
+    "expected": 1,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

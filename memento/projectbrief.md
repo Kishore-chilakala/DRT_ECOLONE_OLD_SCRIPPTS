@@ -1,43 +1,32 @@
-# Project Brief: eColane DRT Platform Test Automation
+# Project Brief
 
-## Project Overview
-Playwright-based end-to-end test automation suite for the eColane DRT (Demand Response Transit) Platform.
+## Project Name
+Playwright React E2E Performance Testing Suite
 
-## Target Application
-- **URL**: https://qa-react.ecolane.com/drt/
-- **Environment**: QA (React-based frontend)
-- **Credentials**: eco_eraju1 / Ecolane#drt123
-- **Role**: Admin / Scheduler / Planner
+## Purpose
+Set up a Playwright-based end-to-end (E2E) test project that:
+1. Records user flows on a React JS application using `playwright codegen`
+2. Replays those flows in Chrome (Chromium)
+3. Measures **frontend rendering times** for every user click/interaction using the browser's Performance API
 
-## Core Requirements (5 Scenarios)
+## Core Requirements
+- Use **Playwright** with **TypeScript**
+- Target **Chromium** (Chrome-compatible) browser, headed mode
+- Integrate **`playwright codegen`** for recording flows without writing selectors manually
+- Measure per-click rendering times using:
+  - `performance.mark()` / `performance.measure()` (Web Performance API)
+  - `PerformanceObserver` for Long Tasks, Layout Shift (CLS), and Paint events
+  - Navigation Timing API for initial page load metrics
+- Output a structured **performance report** per test run
+- Attach the JSON report to Playwright's HTML report
 
-### Scenario 1: Login Functionality
-- Validate successful login with Admin/Scheduler/Planner credentials
-- Validate error handling for invalid credentials
-- Validate session establishment
+## Key Goals
+- Quick setup: record first, then instrument performance
+- Zero manual selector writing (use codegen)
+- Console + HTML report with per-action render durations
+- Configurable BASE_URL via environment variable
 
-### Scenario 2: Create Trips
-- Navigate: Administration → Clients → Client #21879 → Search → New Trip
-- Fill all mandatory trip fields (pickup, dropoff, date, time, purpose, spaces, funding, service)
-- Create future-dated trips
-
-### Scenario 3: Create New Client
-- Navigate: Administration → Clients → New Client
-- Fill all mandatory client fields (name, DOB, phone, address, gender, etc.)
-- Validate required field enforcement
-
-### Scenario 4: Batch Optimization
-- Navigate: Operations → Schedules → Optimize Schedules
-- Click Search to load schedules
-- Click Mark for Review in Schedule, Mark Complete, and Manual Dispatch sections
-
-### Scenario 5: Send Messages
-- Navigate: Operations → Messages → Send Messages
-- Send messages to Drivers and Providers
-- Fill recipient, message type, subject, and body fields
-
-## Success Criteria
-- All 5 scenarios have executable Playwright test cases
-- Tests run in headed browser (Chromium)
-- Screenshots captured at key steps
-- HTML report generated after test run
+## Out of Scope
+- React app source code (this project only tests it externally)
+- CI/CD pipeline setup (future)
+- Multi-browser testing (Chromium only for now)

@@ -1,0 +1,43 @@
+# AiDE Project Intelligence — Playwright React Perf E2E
+
+## Critical Workflow
+1. Developer records flow with `npm run codegen` (opens Chrome at BASE_URL)
+2. Paste each generated action into a `measureRender()` wrapper in `tests/e2e.spec.ts`
+3. Run `npm test` — performance report auto-prints to console
+4. Run `npm run report` — opens HTML report with attached JSON
+
+## Key Patterns
+- NEVER write selectors manually — always use `playwright codegen`
+- ALWAYS wrap user interactions in `measureRender()` from `tests/helpers/perfHelper.ts`
+- Call `injectPerformanceObserver(page)` BEFORE `page.goto()` in every test
+- Collect `getNavigationTiming(page)` AFTER `page.goto()` resolves
+- Accumulate `RenderTiming[]` array, call `buildReport()` + `printReport()` at end of test
+- Attach JSON report using `test.info().attach()`
+
+## Environment
+- OS: Windows 11, PowerShell
+- Node: v26.2.0
+- Use `npx playwright` (not global playwright)
+- Set BASE_URL via `$env:BASE_URL = "http://localhost:PORT"` in PowerShell
+
+## Performance Thresholds
+- Slow action: >300ms (flagged in report summary)
+- Average render assertion: <1000ms (fails test if exceeded)
+- Both are configurable — see progress.md for locations
+
+## File Roles
+- `tests/e2e.spec.ts` — paste codegen output here (inside measureRender blocks)
+- `tests/helpers/perfHelper.ts` — DO NOT modify unless adding new metric types
+- `playwright.config.ts` — change BASE_URL, timeout, headless mode here
+- `scripts/codegen.ps1` — use for guided codegen with instructions
+
+## Common Mistakes to Avoid
+- Do NOT use `workers > 1` — breaks rendering time accuracy
+- Do NOT set `headless: true` — rendering skips paint phases in headless
+- Do NOT use `'commit'` in `waitForLoadState()` — not supported by Playwright
+- Do NOT forget `await page.waitForLoadState('networkidle')` before `getNavigationTiming()`
+
+## npm init playwright Behavior
+- `npm init playwright@latest` interactive wizard got stuck on this machine
+- Always create `package.json`, `playwright.config.ts`, test files manually instead
+- Run `npm install` and `npx playwright install chromium` separately
