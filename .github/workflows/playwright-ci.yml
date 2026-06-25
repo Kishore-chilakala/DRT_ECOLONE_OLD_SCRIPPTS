@@ -12,11 +12,12 @@ on:
       headless:
         description: 'Run headless (true = headless, false = headed)'
         required: false
-        default: 'true'
+        default: '@scripts'
       base_url:
         description: 'Base URL of the React app under test'
         required: false
         default: 'https://qa-react.ecolane.com/drt'
+
 
 env:
   NODE_VERSION: '20'
