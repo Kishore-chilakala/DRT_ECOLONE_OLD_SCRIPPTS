@@ -37,7 +37,7 @@ async function dismissPendoModal(page: import('@playwright/test').Page): Promise
   }
 }
 
-test.describe('React Front-End â€“ Full Trip Booking Flow', { tag: ['@oldscripts'] }, () => {
+test.describe('React Front-End â€“ Full Trip Booking Flow', { tag: ['@scripts'] }, () => {
   test('Login â†’ Administration â†’ Clients â†’ New Client â†’ Book Trip â†’ Messages â†’ Logout', async ({ page }) => {
     // Allow up to 5 minutes for the full end-to-end flow on a remote QA environment
     test.setTimeout(300_000);
