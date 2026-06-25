@@ -4,3 +4,5 @@ playwright-report/
 test-results/
 .playwright/
 *.log
+
+scripts/write-workflow.mjs

@@ -1,0 +1,93 @@
+name: Playwright E2E Performance Tests
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+  workflow_dispatch:
+    inputs:
+      headless:
+        description: 'Run headless (true = headless, false = headed)'
+        required: false
+        default: 'true'
+      base_url:
+        description: 'Base URL of the React app under test'
+        required: false
+        default: 'https://qa-react.ecolane.com/drt'
+
+env:
+  NODE_VERSION: '20'
+  HEADLESS: 'true'
+  BASE_URL: ${{ github.event.inputs.base_url || vars.BASE_URL || 'https://qa-react.ecolane.com/drt' }}
+
+jobs:
+  playwright-tests:
+    name: Run Playwright E2E Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium browser and OS dependencies
+        run: npx playwright install chromium --with-deps
+
+      - name: Run Playwright tests tagged @oldscripts
+        run: npx playwright test --grep @oldscripts
+        env:
+          CI: 'true'
+          HEADLESS: ${{ github.event.inputs.headless || 'true' }}
+          BASE_URL: ${{ env.BASE_URL }}
+
+      - name: Upload Playwright HTML report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-${{ github.run_number }}
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload test results (JSON, traces, screenshots)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-${{ github.run_number }}
+          path: test-results/
+          retention-days: 30
+
+      - name: Upload performance results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: perf-results-${{ github.run_number }}
+          path: perf-results/
+          retention-days: 30
+
+      - name: Write job summary
+        if: always()
+        run: |
+          echo "## Playwright E2E Performance Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Property | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Run Number | ${{ github.run_number }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Triggered By | ${{ github.event_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branch | ${{ github.ref_name }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit SHA | ${{ github.sha }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| BASE_URL | ${{ env.BASE_URL }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| HEADLESS | ${{ github.event.inputs.headless || 'true' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Artifacts: playwright-report, test-results, perf-results" >> $GITHUB_STEP_SUMMARY

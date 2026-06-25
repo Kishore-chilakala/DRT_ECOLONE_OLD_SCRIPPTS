@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+﻿import { test, expect } from '@playwright/test';
 import {
   injectPerformanceObserver,
   measureRender,
@@ -22,44 +22,44 @@ const futureDateLabel = (days: number): string => {
   return `${weekday}, ${month} ${d.getDate()},`;
 };
 
-test.describe('Ecolane React – Trip Booking Flow (eco_eraju1)', () => {
-  test('Login → Clients → Search → New Trip → Book → Logout', async ({ page }) => {
+test.describe('Ecolane React â€“ Trip Booking Flow (eco_eraju1)', { tag: ['@oldscripts'] }, () => {
+  test('Login â†’ Clients â†’ Search â†’ New Trip â†’ Book â†’ Logout', async ({ page }) => {
     // Allow up to 3 minutes for the full end-to-end flow on a remote QA environment
     test.setTimeout(180_000);
 
     const timings: RenderTiming[] = [];
 
-    // ── Step 1: Inject PerformanceObserver before any navigation ─────────────
+    // â”€â”€ Step 1: Inject PerformanceObserver before any navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     await injectPerformanceObserver(page);
 
-    // ── Step 2: Navigate to React DRT root (redirects to SSO login) ──────────
+    // â”€â”€ Step 2: Navigate to React DRT root (redirects to SSO login) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     await page.goto('https://qa-react.ecolane.com/drt/');
     await page.waitForLoadState('domcontentloaded');
 
     // Capture initial page Navigation Timing
     const navTiming = await getNavigationTiming(page);
 
-    // ── Step 3: Verify login form is visible ──────────────────────────────────
+    // â”€â”€ Step 3: Verify login form is visible â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t1 = await measureRender(page, 'login-form-visible', async () => {
       await expect(page.getByRole('textbox', { name: 'Username' })).toBeVisible();
     }, 'domcontentloaded');
     timings.push(t1);
 
-    // ── Step 4: Fill username ─────────────────────────────────────────────────
+    // â”€â”€ Step 4: Fill username â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t2 = await measureRender(page, 'fill-username', async () => {
       await page.getByRole('textbox', { name: 'Username' }).click();
       await page.getByRole('textbox', { name: 'Username' }).fill('eco_eraju1');
     }, 'domcontentloaded');
     timings.push(t2);
 
-    // ── Step 5: Fill password ─────────────────────────────────────────────────
+    // â”€â”€ Step 5: Fill password â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t3 = await measureRender(page, 'fill-password', async () => {
       await page.getByRole('textbox', { name: 'Password' }).click();
       await page.getByRole('textbox', { name: 'Password' }).fill('Ecolane#drt123');
     }, 'domcontentloaded');
     timings.push(t3);
 
-    // ── Step 6: Log in and verify main navigation is accessible ───────────────
+    // â”€â”€ Step 6: Log in and verify main navigation is accessible â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t4 = await measureRender(page, 'log-in', async () => {
       await page.getByRole('button', { name: 'Log in' }).click();
       await expect(page.getByRole('link', { name: 'Clients' })).toBeVisible();
@@ -68,7 +68,7 @@ test.describe('Ecolane React – Trip Booking Flow (eco_eraju1)', () => {
 
     await page.waitForTimeout(3000);
 
-    // ── Step 7: Navigate to Clients list ─────────────────────────────────────
+    // â”€â”€ Step 7: Navigate to Clients list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t5 = await measureRender(page, 'navigate-to-clients', async () => {
       await page.getByRole('link', { name: 'Clients' }).click();
       await expect(page.getByRole('textbox', { name: 'Free text search' })).toBeVisible();
@@ -77,7 +77,7 @@ test.describe('Ecolane React – Trip Booking Flow (eco_eraju1)', () => {
 
     await page.waitForTimeout(2000);
 
-    // ── Step 8: Search for client 28325 ──────────────────────────────────────
+    // â”€â”€ Step 8: Search for client 28325 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t6 = await measureRender(page, 'search-client-28325', async () => {
       await page.getByRole('textbox', { name: 'Free text search' }).click();
       await page.getByRole('textbox', { name: 'Free text search' }).fill('28325');
@@ -88,14 +88,14 @@ test.describe('Ecolane React – Trip Booking Flow (eco_eraju1)', () => {
 
     await page.waitForTimeout(2000);
 
-    // ── Step 9: Open New Trip form ────────────────────────────────────────────
+    // â”€â”€ Step 9: Open New Trip form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t7 = await measureRender(page, 'open-new-trip', async () => {
       await page.getByRole('button', { name: 'New trip' }).click();
       await expect(page.getByRole('button', { name: 'No date selected' })).toBeVisible();
     }, 'domcontentloaded');
     timings.push(t7);
 
-    // ── Step 10: Open calendar and select a future date ───────────────────────
+    // â”€â”€ Step 10: Open calendar and select a future date â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const futureDateBtnLabel = futureDateLabel(3);
     const t8 = await measureRender(page, 'select-trip-date', async () => {
       await page.getByRole('button', { name: 'No date selected' }).click();
@@ -113,21 +113,21 @@ test.describe('Ecolane React – Trip Booking Flow (eco_eraju1)', () => {
     }, 'domcontentloaded');
     timings.push(t8);
 
-    // ── Step 11: Fill trip time ───────────────────────────────────────────────
+    // â”€â”€ Step 11: Fill trip time â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t9 = await measureRender(page, 'fill-trip-time', async () => {
       await page.getByRole('textbox', { name: 'Time *' }).click();
       await page.getByRole('textbox', { name: 'Time *' }).fill('1445');
     }, 'domcontentloaded');
     timings.push(t9);
 
-    // ── Step 12: Open pick-up address popup ───────────────────────────────────
+    // â”€â”€ Step 12: Open pick-up address popup â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t10 = await measureRender(page, 'open-pickup-popup', async () => {
       await page.getByLabel('Pick-up').getByRole('button', { name: 'Toggle popup' }).click();
       await expect(page.getByText('Home address 10 Pine Hollow, Athens')).toBeVisible();
     }, 'domcontentloaded');
     timings.push(t10);
 
-    // ── Step 13: Select pick-up address ──────────────────────────────────────
+    // â”€â”€ Step 13: Select pick-up address â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t11 = await measureRender(page, 'select-pickup-address', async () => {
       await page.getByText('Home address 10 Pine Hollow, Athens').click();
     }, 'domcontentloaded');
@@ -135,14 +135,14 @@ test.describe('Ecolane React – Trip Booking Flow (eco_eraju1)', () => {
 
     await page.waitForTimeout(1000);
 
-    // ── Step 14: Open drop-off address popup ──────────────────────────────────
+    // â”€â”€ Step 14: Open drop-off address popup â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t12 = await measureRender(page, 'open-dropoff-popup', async () => {
       await page.getByLabel('Drop-off').getByRole('button', { name: 'Toggle popup' }).click();
       await expect(page.getByLabel('Drop-off').getByText('100 Hillside Street 100')).toBeVisible();
     }, 'domcontentloaded');
     timings.push(t12);
 
-    // ── Step 15: Select drop-off address ─────────────────────────────────────
+    // â”€â”€ Step 15: Select drop-off address â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t13 = await measureRender(page, 'select-dropoff-address', async () => {
       await page.getByLabel('Drop-off').getByText('100 Hillside Street 100').click();
     }, 'domcontentloaded');
@@ -150,7 +150,7 @@ test.describe('Ecolane React – Trip Booking Flow (eco_eraju1)', () => {
 
     await page.waitForTimeout(1000);
 
-    // ── Step 16: Create trip – triggers API call ──────────────────────────────
+    // â”€â”€ Step 16: Create trip â€“ triggers API call â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t14 = await measureRender(page, 'create-trip', async () => {
       await page.getByRole('button', { name: 'Create trip' }).click();
     }, 'domcontentloaded');
@@ -158,7 +158,7 @@ test.describe('Ecolane React – Trip Booking Flow (eco_eraju1)', () => {
 
     await page.waitForTimeout(2000);
 
-    // ── Step 17: Navigate back to Administration → Clients ────────────────────
+    // â”€â”€ Step 17: Navigate back to Administration â†’ Clients â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t15 = await measureRender(page, 'back-to-clients', async () => {
       await page.getByRole('button', { name: 'Administration' }).click();
       await page.getByRole('menuitem', { name: 'Clients' }).click();
@@ -168,7 +168,7 @@ test.describe('Ecolane React – Trip Booking Flow (eco_eraju1)', () => {
 
     await page.waitForTimeout(2000);
 
-    // ── Step 18: Open user menu and log out ───────────────────────────────────
+    // â”€â”€ Step 18: Open user menu and log out â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const t16 = await measureRender(page, 'log-out', async () => {
       // Try common logout patterns for the React app
       const logoutBtn = page.getByRole('button', { name: /log\s*out|sign\s*out/i }).first();
@@ -184,17 +184,17 @@ test.describe('Ecolane React – Trip Booking Flow (eco_eraju1)', () => {
 
     await page.waitForTimeout(3000);
 
-    // ── Step 19: Build and print full performance report ─────────────────────
+    // â”€â”€ Step 19: Build and print full performance report â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const report = buildReport(BASE_URL, timings, navTiming);
     printReport(report);
 
-    // ── Step 20: Attach report JSON to Playwright HTML report ─────────────────
+    // â”€â”€ Step 20: Attach report JSON to Playwright HTML report â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     await test.info().attach('performance-report.json', {
       body: JSON.stringify(report, null, 2),
       contentType: 'application/json',
     });
 
-    // ── Step 21: Performance assertion ────────────────────────────────────────
+    // â”€â”€ Step 21: Performance assertion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     if (report.summary.totalActions > 0) {
       expect(
         report.summary.averageRenderTime,
@@ -203,3 +203,4 @@ test.describe('Ecolane React – Trip Booking Flow (eco_eraju1)', () => {
     }
   });
 });
+
