@@ -16,7 +16,7 @@ on:
       base_url:
         description: 'Base URL of the React app under test'
         required: false
-        default: '@scripts'
+        default: 'https://qa-react.ecolane.com/drt'
 
 env:
   NODE_VERSION: '20'
