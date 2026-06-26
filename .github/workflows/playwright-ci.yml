@@ -9,10 +9,14 @@ on:
       - '**'
   workflow_dispatch:
     inputs:
+      duration:
+        description: 'Test run duration in minutes (e.g. 30)'
+        required: false
+        default: '30'
       headless:
         description: 'Run headless (true = headless, false = headed)'
         required: false
-        default: '@oldscripts'
+        default: 'true'
       base_url:
         description: 'Base URL of the React app under test'
         required: false
@@ -26,9 +30,9 @@ env:
 
 jobs:
   playwright-tests:
-    name: Run Playwright E2E Tests
+    name: Run Playwright Performance Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 180
 
     steps:
       - name: Checkout repository
@@ -46,12 +50,34 @@ jobs:
       - name: Install Playwright Chromium browser and OS dependencies
         run: npx playwright install chromium --with-deps
 
-      - name: Run Playwright tests tagged @oldscripts
-        run: npx playwright test --grep @oldscripts
+      - name: Run duration-based performance tests
+        run: node scripts/run-duration.mjs --duration ${{ github.event.inputs.duration || '30' }} --spec tests/react-booking-new.spec.ts
         env:
           CI: 'true'
           HEADLESS: ${{ github.event.inputs.headless || 'true' }}
           BASE_URL: ${{ env.BASE_URL }}
+
+      - name: Generate performance HTML report
+        if: always()
+        run: npm run perf:report
+        env:
+          CI: 'true'
+
+      - name: Upload performance HTML report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: perf-report-${{ github.run_number }}
+          path: perf-results/report.html
+          retention-days: 30
+
+      - name: Upload performance results (JSON + full folder)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: perf-results-${{ github.run_number }}
+          path: perf-results/
+          retention-days: 30
 
       - name: Upload Playwright HTML report
         uses: actions/upload-artifact@v4
@@ -69,14 +95,6 @@ jobs:
           path: test-results/
           retention-days: 30
 
-      - name: Upload performance results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: perf-results-${{ github.run_number }}
-          path: perf-results/
-          retention-days: 30
-
       - name: Write job summary
         if: always()
         run: |
@@ -90,5 +108,7 @@ jobs:
           echo "| Commit SHA | ${{ github.sha }} |" >> $GITHUB_STEP_SUMMARY
           echo "| BASE_URL | ${{ env.BASE_URL }} |" >> $GITHUB_STEP_SUMMARY
           echo "| HEADLESS | ${{ github.event.inputs.headless || 'true' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Duration (mins) | ${{ github.event.inputs.duration || '30' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Spec | tests/react-booking-new.spec.ts |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Artifacts: playwright-report, test-results, perf-results" >> $GITHUB_STEP_SUMMARY
+          echo "Artifacts: perf-report, perf-results, playwright-report, test-results" >> $GITHUB_STEP_SUMMARY
