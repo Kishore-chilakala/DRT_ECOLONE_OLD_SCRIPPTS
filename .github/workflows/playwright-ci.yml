@@ -12,7 +12,7 @@ on:
       headless:
         description: 'Run headless (true = headless, false = headed)'
         required: false
-        default: '@scripts'
+        default: '@oldscripts'
       base_url:
         description: 'Base URL of the React app under test'
         required: false
